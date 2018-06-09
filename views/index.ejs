@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="preciobtc">
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600">
+    <link rel="stylesheet" href="/skeleton-css/css/skeleton.css">
+    <link rel="stylesheet" href="/skeleton-css/css/normalize.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body ng-controller="mainController">
+
+    <div class="container one">
+      <div class="row trans">
+        <h2>Calculá el valor de tu operación de Bitcoins</h2>
+        <p>Ingresá la operación, el monto y el sitio por el cuál vas a realizar la transacción</p>
+      </div>
+      <div class="row" style="width:50%;margin:0 auto;">
+        <div class="three columns">
+          <label for="accion">Operación</label>
+          <select class="u-full-width" id="accion" ng-options="accion.name for accion in acciones" ng-model="selectedAccion" ng-change="operacionChange()">
+          </select>
+        </div>
+        <div class="three columns">
+          <div class="row">
+            <div class="eight columns">
+              <label for="monto">Monto</label>
+              <input class="u-full-width" type="text" placeholder="" id="monto" ng-model="selectedMonto" ng-change="inputChange()">
+            </div>
+            <div class="four columns" style="margin-top: 42px; font-weight: bold;">
+              <span ng-show="selectedAccion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
+              <span ng-show="selectedAccion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;color: #EE8337;"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="three columns">
+          <label for="sitio">Sitio</label>
+          <select class="u-full-width" id="sitio" ng-options="sitio.name for sitio in sitios" ng-model="selectedSitio" ng-change="inputChange()">
+          </select>
+        </div>
+        <div class="three columns">
+          <button class="button button-primary u-full-width" ng-click="buttonaAction()" ng-disabled="transShow">Calcular</button>
+        </div>
+      </div>
+      <div class="row animate-if" ng-if="transShow">
+        <div class="transCard">
+            <div class="header">
+              <h5>{{ selectedSitio.name }}</h5>
+            </div>
+            <ul>
+              <!--li ng-show="selectedAccion.name == 'Compra'">{{ selectedMonto }} BTC te costará <strong>{{ buyInBTC | currency }}</strong></li-->
+              <li ng-show="selectedAccion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</li>
+              <li ng-show="selectedAccion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"$":2 }}</strong></li>
+            </ul>
+        </div>
+        <p class="msg"><i class="fas fa-bullhorn"></i> {{ transMsg }}</p>
+      </div>
+    </div>
+
+    <div class="container two">
+
+      <div id="on-air">
+        <i class="fa fa-circle"></i>
+        <span class="live">En vivo</span>
+      </div>
+      <div class="row">
+        <div class="six columns">
+          <h3>Comprar 1 BTC</h3>
+          <div class="example-grid docs-example">
+            <div class="row tap" ng-repeat="(key, value) in buyASC" ng-class="{opacity1: key == 0, opacity2: key == 1, opacity3: key == 2, opacity4: key == 3, opacity5: key == 4, opacity6: key == 5, opacity7: key == 6, opacity8: key == 7, opacity9: key == 8, opacity10: key == 9 }">
+              <div class="two columns" ng-class="{transparent: key != 0}"><i class="fas fa-trophy" ng-if="key == 0"></i></div>
+              <div class="four columns right">{{ value.name }}</div>
+              <div class="six columns left">{{ value.buy | currency }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="six columns">
+          <h3>Vender 1 BTC</h3>
+          <div class="example-grid docs-example">
+            <div class="row tap" ng-repeat="(key, value) in sellDESC" ng-class="{opacity1: key == 0, opacity2: key == 1, opacity3: key == 2, opacity4: key == 3, opacity5: key == 4, opacity6: key == 5, opacity7: key == 6, opacity8: key == 7, opacity9: key == 8, opacity10: key == 9 }">
+              <div class="two columns" ng-class="{transparent: key != 0}"><i class="fas fa-trophy" ng-if="key == 0"></i></div>
+              <div class="four columns right">{{ value.name }}</div>
+              <div class="six columns left">{{ value.sell | currency }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-animate/angular-animate.min.js"></script>
+    <script src="/angular-socket-io/socket.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+  </body>
+</html>

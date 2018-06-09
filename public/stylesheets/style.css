@@ -1,0 +1,213 @@
+body {
+  background-image: linear-gradient(to right, #0B4182 0%, #1e88e5 51%, #40BAF5 100%); }
+h2, h3, label {
+  color: white; }
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  height: 48px;
+  padding: 6px 10px;
+  border-radius: 8px; }
+.container.one {
+  width: 100%;
+  max-width: 100%;
+  background: white;
+  padding: 40px 0; }
+.container.one h2 {
+  color: #1e88e5; }
+.container.one label {
+  color: grey; }
+.container.one .trans {
+  text-align: center; }
+.container.one .trans h2 {
+  font-weight: 600;
+  margin: 0; }
+.container.one .trans p {
+  font-size: 2rem;
+  color: grey; }
+.container.one .button-primary {
+  height: 48px; 
+  line-height: 48px; 
+  margin-top: 29px; 
+  background: #40BAF5; }
+.container.one .button-primary:disabled {
+  background: #aaa !important;
+  color: #ccc !important;
+  border: 0 !important; }
+.container.two {
+  margin-bottom: 100px;}
+.tap:hover {
+  opacity: 1 !important; }
+.tap:hover > .columns {
+  background: transparent !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important; 
+  color: white !important; }
+.tap:hover > .columns .fa-trophy {
+  color: white !important; }
+.tap:hover > .transparent {
+  background: none !important; }
+.example-grid .columns {
+  background: white;
+  text-align: center;
+  cursor: default;
+  border-radius: 4px;
+  height: 40px;
+  line-height: 42px;
+  margin-bottom: .75rem;
+  font-size: 1.5rem;
+  letter-spacing: .1rem;
+  -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,.1);
+  box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,.1); }
+.transCard {
+  background: #1e88e5;
+  color: white;
+  margin: 0 auto;
+  margin-top: 32px;
+  width: 424px;
+  padding: 30px;
+  cursor: default;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  letter-spacing: .1rem;
+  -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,.2);
+  box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,.2); }
+.transCard .header {
+  text-align: left; }
+.transCard .header h5 {
+  color: white;
+  margin: 10px; }
+.transCard ul {
+  margin: 10px;
+  text-transform: uppercase;
+  font-size: 16px; }
+.transparent {
+  background: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important; }
+.msg {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  color: grey;
+}
+.docs-example .row {
+  margin-bottom: 0; }
+.fa-trophy {
+  color: #F2BF4C;
+  font-size: 20px;
+  margin-top: 10px; }
+.right {
+  text-align: right !important;
+  text-transform: uppercase;
+  font-size: 1rem !important;
+  font-weight: 600;
+  padding-right: 1.5rem; }
+.left {
+  text-align: left !important;
+  padding-left: 1rem; }
+.opacity1 {
+  opacity: 1; }
+.opacity2 {
+  opacity: 0.9; }
+.opacity3 {
+  opacity: 0.8; }
+.opacity4 {
+  opacity: 0.7; }
+.opacity5 {
+  opacity: 0.6; }
+.opacity6 {
+  opacity: 0.5; }
+.opacity7 {
+  opacity: 0.4; }
+.opacity8 {
+  opacity: 0.3; }
+.opacity9 {
+  opacity: 0.2; }
+.opacity10 {
+  opacity: 0.1; }
+#on-air {
+  text-align: right;
+  margin: 20px 0;
+}
+.live {
+  border-radius: 4px;
+  background-color: #333;
+  display: inline-block;
+  color: white;
+  padding: 7px 7px 4px 7px;
+  font-family: sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 1px;
+  top: -1px;
+  position: relative; }
+.fa-circle {
+  -webkit-animation-name: blinker;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-name: blinker;
+  -moz-animation-duration: 2s;
+  -moz-animation-timing-function: linear;
+  -moz-animation-iteration-count: infinite;
+  animation-name: blinker;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  color: green; }
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s; }
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0; }
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1; }
+@-moz-keyframes blinker {
+  0% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+@-webkit-keyframes blinker {
+  0% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+@keyframes blinker {
+  0% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+@media (min-width: 550px) {
+  .example-grid .column,
+  .example-grid .columns {
+    margin-bottom: 1.5rem; }
+}
