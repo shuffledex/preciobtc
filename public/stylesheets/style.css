@@ -15,7 +15,7 @@ select {
   padding: 6px 10px;
   border-radius: 8px; }
 .form {
-  width:333px;
+  width:290px;
   margin:0 auto;}
 .inputMonto {
   width: 80%; }
@@ -127,7 +127,7 @@ span.question {
   font-weight: 600; }
 .rapipago, .transferencia, .mercadopago {
   margin: 10px 0;
-  font-size: 13px; 
+  font-size: 18px; 
   cursor: pointer; }
 .ordenado {
   margin-bottom: 23px;
@@ -260,4 +260,6 @@ span.question {
     margin-top: 0; }
   .tablaVenta {
     margin-top: 0; }
+  .rapipago, .transferencia, .mercadopago {
+    font-size: 13px; }
 }
