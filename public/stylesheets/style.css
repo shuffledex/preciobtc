@@ -14,6 +14,14 @@ select {
   height: 48px;
   padding: 6px 10px;
   border-radius: 8px; }
+.form {
+  width:333px;
+  margin:0 auto;}
+.inputMonto {
+  width: 80%; }
+.iconMonto {
+  width: 20%;
+  padding-left: 10px }
 .container.one {
   width: 100%;
   max-width: 100%;
@@ -22,12 +30,13 @@ select {
 .container.one h2 {
   color: #1e88e5; }
 .container.one label {
+  margin-top: 10px;
   color: grey; }
 .container.one .trans {
   text-align: center; }
 .container.one .trans h2 {
   font-weight: 600;
-  margin: 0; }
+  margin: 0 20px; }
 .container.one .trans p {
   font-size: 2rem;
   color: grey; }
@@ -69,12 +78,22 @@ span.question {
   letter-spacing: .1rem;
   -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,.1);
   box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,.1); }
+.example-grid .two {
+  width: 13.3333333333%; }
+.example-grid .four {
+  width: 30.6666666667%;
+  margin-left: 4%; }
+.example-grid .six {
+  width: 48%;
+  margin-left: 4%; }
+.tablaVenta {
+  margin-top: 32px; }
 .transCard {
   background: #1e88e5;
   color: white;
   margin: 0 auto;
   margin-top: 32px;
-  width: 424px;
+  width: 272px;
   padding: 30px;
   cursor: default;
   border-radius: 4px;
@@ -224,7 +243,21 @@ span.question {
   }
 }
 @media (min-width: 550px) {
+  .form {
+    width:888px;
+    margin:0 auto;}
+  .inputMonto {
+    width: 100%; }
+  .iconMonto {
+    width: 100%;
+    padding-left: 0; }
   .example-grid .column,
   .example-grid .columns {
     margin-bottom: 1.5rem; }
+  .transCard {
+    width: 424px;}
+  .container.one label {
+    margin-top: 0; }
+  .tablaVenta {
+    margin-top: 0; }
 }

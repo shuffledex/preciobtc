@@ -18,7 +18,7 @@
         <h2>Calculá el valor de tu operación de Bitcoins</h2>
         <p>Compará y sacá diferencia en tu próxima operación</p>
       </div>
-      <div class="row" style="width:888px;margin:0 auto;">
+      <div class="row form">
         <div class="two columns">
           <label for="operacion">Operación</label>
           <select class="u-full-width" id="operacion" ng-options="operacion.name for operacion in operaciones" ng-model="selectedOperacion" ng-change="operacionChange()">
@@ -36,11 +36,11 @@
         </div>
         <div class="two columns">
           <div class="row">
-            <div class="ten columns">
+            <div class="ten columns inputMonto">
               <label for="monto">Monto</label>
               <input class="u-full-width" type="text" placeholder="" id="monto" ng-model="selectedMonto" ng-change="inputChange()">
             </div>
-            <div class="two columns" style="margin-top: 42px; font-weight: bold;">
+            <div class="two columns iconMonto" style="margin-top: 42px; font-weight: bold;">
               <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
               <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;color: #EE8337;"></i></span>
             </div>
@@ -53,7 +53,7 @@
       <div class="row animate-if" ng-if="transShow">
         <div class="transCard">
             <div class="header">
-              <h5>{{ selectedSitio.name }} <span class="u-pull-right" style="font-size: 14px"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right"></i></span></h5>
+              <h5>{{ selectedSitio.name }} <span class="u-pull-right" style="font-size: 14px"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
             </div>
             <ul>
               <!--li ng-show="selectedOperacion.name == 'Compra'">{{ selectedMonto }} BTC te costará <strong>{{ buyInBTC | currency }}</strong></li-->
@@ -105,7 +105,7 @@
             </div>
           </div>
         </div>
-        <div class="six columns">
+        <div class="six columns tablaVenta">
           <h4 style="margin:0;">Vendiendo 1 BTC te darán...</h4>
 
           <div class="row medios">
