@@ -99,7 +99,7 @@
           <p class="ordenado">Ordenado por mejor precio de compra</p>
           <div class="example-grid docs-example">
             <div class="row tap" ng-repeat="(key, value) in tableBuy | filter: filterCompra | orderBy: 'buy'" ng-class="{opacity1: key == 0, opacity2: key == 1, opacity3: key == 2, opacity4: key == 3, opacity5: key == 4, opacity6: key == 5, opacity7: key == 6, opacity8: key == 7, opacity9: key == 8, opacity10: key == 9 }">
-              <div class="two columns"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange"></i></div>
+              <div class="two columns"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="four columns right">{{ value.name }}</div>
               <div class="six columns left">{{ value.buy | currency }}</div>
             </div>
@@ -127,7 +127,7 @@
           <p class="ordenado">Ordenado por mejor precio de venta</p>
           <div class="example-grid docs-example">
             <div class="row tap" ng-repeat="(key, value) in tableSell | filter: filterVenta | orderBy: '-sell'" ng-class="{opacity1: key == 0, opacity2: key == 1, opacity3: key == 2, opacity4: key == 3, opacity5: key == 4, opacity6: key == 5, opacity7: key == 6, opacity8: key == 7, opacity9: key == 8, opacity10: key == 9 }">
-              <div class="two columns"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange"></i></div>
+              <div class="two columns"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="four columns right">{{ value.name }}</div>
               <div class="six columns left">{{ value.sell | currency }}</div>
             </div>
