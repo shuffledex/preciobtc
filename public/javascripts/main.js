@@ -8,6 +8,7 @@ angular.module('preciobtc.controllers', [])
     	$scope.selectedModo = null;
     	$scope.selectedSitio = null;
     	$scope.selectedMonto = null;
+    	$scope.transShow = false;
 
     	$scope.monedas = [{name: "BTC"}, {name: "ARS"}];
     	$scope.operaciones = [{name: "Compra"}, {name: "Venta"}];
@@ -47,6 +48,16 @@ angular.module('preciobtc.controllers', [])
 					$scope.transMsg = "Comprando en " + newSitios[0].name + " obtendrías " + newValue + " BTC";//(+" + (newValue - $scope.buyInARS) + ")";
 				}
 
+				//if ($scope.selectedSitio.cargar)
+				if ($scope.selectedModo.name == "Transferencia") {
+					$scope.questionMsg = "Fees por Transf.: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.transferencia + "%"
+				}
+				else if ($scope.selectedModo.name == "Mercadopago") {
+					$scope.questionMsg = "Fees por Mercadopago: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.mercadopago + "%"
+				}
+				else if ($scope.selectedModo.name == "Rapipago/Pagofacil") {
+					$scope.questionMsg = "Fees de Rapipago/Pagofacil: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.rapipago_pagofacil + "%"
+				}
 			}
 			else if ($scope.selectedOperacion.name == "Venta") {
 
@@ -75,7 +86,7 @@ angular.module('preciobtc.controllers', [])
 			$scope.selectedSitio = null;
 			$scope.selectedMonto = null;
 			if ($scope.selectedOperacion.name == "Compra") {
-				$scope.modos = [{name: "Transferencia"}, {name: "Mercadopago"}, {name: "Rapipago"}]
+				$scope.modos = [{name: "Transferencia"}, {name: "Mercadopago"}, {name: "Rapipago/Pagofacil"}]
 			}
 			else if ($scope.selectedOperacion.name == "Venta") {
 				$scope.modos = [{name: "Wallet"}, {name: "Deposito"}]
@@ -87,12 +98,18 @@ angular.module('preciobtc.controllers', [])
 			}
 			if ($scope.selectedModo.name == "Transferencia") {
 				$scope.sitios = _.filter(arrs[0], function(o) { return o.cargar.hasOwnProperty("transferencia") });
+				$scope.radioModoCompra = "transferencia";
+				$scope.tableBuy = addFee("Transferencia", $scope.buyASC)
 			}
 			else if ($scope.selectedModo.name == "Mercadopago") {
 				$scope.sitios = _.filter(arrs[0], function(o) { return o.cargar.hasOwnProperty("mercadopago") });
+				$scope.radioModoCompra = "mercadopago";
+				$scope.tableBuy = addFee("Mercadopago", $scope.buyASC)
 			}
-			else if ($scope.selectedModo.name == "Rapipago") {
+			else if ($scope.selectedModo.name == "Rapipago/Pagofacil") {
 				$scope.sitios = _.filter(arrs[0], function(o) { return o.cargar.hasOwnProperty("rapipago_pagofacil") });
+				$scope.radioModoCompra = "rapipago";
+				$scope.tableBuy = addFee("Rapipago/Pagofacil", $scope.buyASC)
 			}
 			else if ($scope.selectedModo.name == "Wallet") {
 				$scope.sitios = _.filter(arrs[0], function(o) {
@@ -101,6 +118,8 @@ angular.module('preciobtc.controllers', [])
 					}
 					return o.vender.hasOwnProperty("billetera")
 				});
+				$scope.radioModoVenta = "billetera";
+				$scope.tableSell = addFee("Wallet", $scope.sellDESC)
 			}
 			else if ($scope.selectedModo.name == "Deposito") {
 				$scope.sitios = _.filter(arrs[0], function(o) {
@@ -109,6 +128,8 @@ angular.module('preciobtc.controllers', [])
 					}
 					return o.vender.hasOwnProperty("pesos")
 				});
+				$scope.radioModoVenta = "pesos";
+				$scope.tableSell = addFee("Deposito", $scope.sellDESC)
 			}
 
 			$scope.transShow = false;
@@ -122,7 +143,7 @@ angular.module('preciobtc.controllers', [])
 				$scope.tableBuy = addFee("Mercadopago", $scope.buyASC)
 			}
 			else if ($scope.radioModoCompra == "rapipago") {
-				$scope.tableBuy = addFee("Rapipago", $scope.buyASC)
+				$scope.tableBuy = addFee("Rapipago/Pagofacil", $scope.buyASC)
 			}
 		}
 		$scope.radioVenderChange = function() {
@@ -291,7 +312,7 @@ angular.module('preciobtc.services', [])
 				newSitios.push(_sitio)
 			})
 		}
-		else if (modo == "Rapipago") {
+		else if (modo == "Rapipago/Pagofacil") {
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
