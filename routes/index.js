@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
       console.log("The read failed: " + errorObject.code);
     });
   });
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Precio BTC' });
 });
 
 module.exports = router;

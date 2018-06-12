@@ -10,11 +10,13 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
+    "express-sitemap": "^1.8.0",
     "firebase-admin": "^5.12.1",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
-    "socket.io": "^2.1.1",
+    "prerender-node": "^3.1.1",
     "skeleton": "^0.1.2",
-    "skeleton-css": "^2.0.4"
+    "skeleton-css": "^2.0.4",
+    "socket.io": "^2.1.1"
   }
 }

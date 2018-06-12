@@ -16,7 +16,7 @@
     <div class="container one">
       <div class="row trans">
         <h2>Calculá el valor de tu operación de Bitcoins</h2>
-        <p>Compará y sacá diferencia en tu próxima operación</p>
+        <p>Compara y elige tu Mejor Opción</p>
       </div>
       <div class="row form">
         <div class="two columns">
@@ -25,12 +25,12 @@
           </select>
         </div>
         <div class="two columns">
-          <label for="modo">Modo</label>
+          <label for="modo">Modo <span style="font-size: 12px"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>
           <select class="u-full-width" id="modo" ng-options="modo.name for modo in modos" ng-model="selectedModo" ng-change="modosChange()">
           </select>
         </div>
         <div class="two columns">
-          <label for="sitio">Sitio</label>
+          <label for="sitio">Plataforma</label>
           <select class="u-full-width" id="sitio" ng-options="sitio.name for sitio in sitios" ng-model="selectedSitio" ng-change="inputChange()">
           </select>
         </div>
@@ -52,17 +52,26 @@
       </div>
       <div class="row animate-if" ng-if="transShow">
         <div class="transCard">
+            <i class="btc-icon fab fa-bitcoin"></i>
             <div class="header">
-              <h5>{{ selectedSitio.name }} <span class="u-pull-right" style="font-size: 14px"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
+              <h5>{{ selectedSitio.name }} <span style="font-size: 14px"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
             </div>
             <ul>
-              <!--li ng-show="selectedOperacion.name == 'Compra'">{{ selectedMonto }} BTC te costará <strong>{{ buyInBTC | currency }}</strong></li-->
-              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</li>
+              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>
               <li ng-show="selectedOperacion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"$":2 }}</strong></li>
             </ul>
         </div>
         <p class="msg"><i class="fas fa-bullhorn"></i> {{ transMsg }}</p>
       </div>
+    </div>
+
+    <div class="container middle">
+      <h5>Mejor precio de compra</h5>
+      <ul>
+        <li>Transferencia Bancaria <strong>{{bestTransferencia[0].name}}</strong> {{bestTransferencia[0].buy | currency:"$":2}}</li>
+        <li>Mercadopago <strong>{{bestMercadopago[0].name}}</strong> {{bestMercadopago[0].buy | currency:"$":2}}</li>
+        <li>Rapipago/Pagofacil <strong>{{bestRapipago[0].name}}</strong> {{bestRapipago[0].buy | currency:"$":2}}</li>
+      </ul>
     </div>
 
     <div class="container two">
@@ -75,7 +84,7 @@
           <h4 style="margin:0;">Comprar 1 BTC te saldrá...</h4>
 
           <div class="row medios">
-            <h5>Modo de compra <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Cada modo de compra posee cargos adicionales diferentes" tooltip-size="large" tooltip-side="right"></i></span></h5>
+            <h5>Modo de compra <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para cargar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
             <div class="four columns" style="margin-left: 0;">
               <label class="transferencia">
                 <input type="radio" ng-model="radioModoCompra" value="transferencia" ng-change="radioCompraChange()">
@@ -91,7 +100,7 @@
             <div class="four columns">
               <label class="rapipago">
                 <input type="radio" ng-model="radioModoCompra" value="rapipago" ng-change="radioCompraChange()">
-                <span class="label-body">Rapipago/Pagofacil</span>
+                <span class="label-body">Rapi/Pago facil</span>
               </label>
             </div>
           </div>
@@ -109,7 +118,7 @@
           <h4 style="margin:0;">Vendiendo 1 BTC te darán...</h4>
 
           <div class="row medios">
-            <h5>Modo de venta <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Cada modo de venta posee cargos adicionales diferentes" tooltip-size="large" tooltip-side="right"></i></span></h5>
+            <h5>Modo de venta <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para retirar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
             <div class="four columns" style="margin-left: 0;">
               <label class="transferencia">
                 <input type="radio" ng-model="radioModoVenta" value="billetera" ng-change="radioVenderChange()">

@@ -49,6 +49,37 @@ select {
   background: #aaa !important;
   color: #ccc !important;
   border: 0 !important; }
+.container.middle {
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  background: #DDD;
+  -webkit-box-shadow: 0 1rem 3.5rem  rgba(0,0,0,.2);
+  box-shadow: 0 1rem 3.5rem  rgba(0,0,0,.2);
+  padding: 20px 0;}
+.middle h5 {
+  text-transform: uppercase;
+  letter-spacing: .1rem; 
+  margin: 0;
+  color: #aaa; }
+.middle ul {
+  margin: 0 auto;
+  width: 100%;
+  list-style-type: none;
+  padding: 0; }
+.middle li {
+  display: inline;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  font-size: 12px;
+  margin: 0; } 
+.middle li::after {
+  padding: 0 10px;
+  content: "·"; }
+.middle li:last-child::after {
+  padding: 0;
+  content: ""; }
 .container.two {
   margin-bottom: 100px;}
 .tap:hover {
@@ -89,6 +120,7 @@ span.question {
 .tablaVenta {
   margin-top: 32px; }
 .transCard {
+  position: relative;
   background: #1e88e5;
   color: white;
   margin: 0 auto;
@@ -110,6 +142,11 @@ span.question {
   margin: 10px;
   text-transform: uppercase;
   font-size: 16px; }
+.transCard .btc-icon {
+  font-size: 12rem;
+  position: absolute;
+  right: 20px;
+  opacity: .1 }
 .msg {
   text-align: center;
   margin-top: 20px;
@@ -148,7 +185,7 @@ span.question {
 .left {
   text-align: left !important;
   padding-left: 1rem; }
-.opacity1 {
+/*.opacity1 {
   opacity: 1; }
 .opacity2 {
   opacity: 0.9; }
@@ -167,7 +204,7 @@ span.question {
 .opacity9 {
   opacity: 0.2; }
 .opacity10 {
-  opacity: 0.1; }
+  opacity: 0.1; }*/
 #on-air {
   text-align: right;
   margin: 20px 0;
@@ -244,8 +281,7 @@ span.question {
 }
 @media (min-width: 550px) {
   .form {
-    width:888px;
-    margin:0 auto;}
+    width:725px;}
   .inputMonto {
     width: 100%; }
   .iconMonto {
@@ -263,3 +299,8 @@ span.question {
   .rapipago, .transferencia, .mercadopago {
     font-size: 13px; }
 }
+@media (min-width: 1000px) {
+  .form {
+    width:888px;}
+}
+

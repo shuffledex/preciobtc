@@ -5,11 +5,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var sitemap = require('express-sitemap');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
+
+// https://prerender.io
+app.use(require('prerender-node').set('prerenderToken', 'DNctT8hQbQ0C5Kirg8EC'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +27,24 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+var map = sitemap({
+  map: {
+    '/': ['get']
+  },
+  route: {
+    '/': {
+      changefreq: 'always',
+      priority: 1.0,
+    }
+  }
+});
+
+app.get('/sitemap.xml', function(req, res) {
+  map.XMLtoWeb(res);
+}).get('/robots.txt', function(req, res) {
+  map.TXTtoWeb(res);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

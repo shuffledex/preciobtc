@@ -1,6 +1,6 @@
 angular.module('preciobtc.controllers', [])
 .constant('_', window._)
-.controller('mainController', function($scope, $filter, mySocket, generateJson, addFee) {
+.controller('mainController', function($scope, $filter, mySocket, generateJson, addFee, tableSort) {
     mySocket.on('prices', function (ev, data) {
     	var arrs = generateJson(ev);
 
@@ -15,171 +15,205 @@ angular.module('preciobtc.controllers', [])
 
     	$scope.buyASC = arrs[0];
     	$scope.sellDESC = arrs[1];
+
+    	$scope.onlyTransferencia = _.filter($scope.buyASC, function(o) { return o.cargar.hasOwnProperty("transferencia") });
+    	$scope.bestTransferencia = tableSort(addFee("Transferencia", $scope.onlyTransferencia), "asc");
+    	$scope.onlyMercadopago = _.filter($scope.buyASC, function(o) { return o.cargar.hasOwnProperty("mercadopago") });
+    	$scope.bestMercadopago = tableSort(addFee("Mercadopago", $scope.onlyMercadopago), "asc");
+    	$scope.onlyeRapipago = _.filter($scope.buyASC, function(o) { return o.cargar.hasOwnProperty("rapipago_pagofacil") });
+    	$scope.bestRapipago = tableSort(addFee("Rapipago/Pagofacil", $scope.onlyeRapipago), "asc");
+
+    	$scope.bestWallet = tableSort(addFee("Wallet", $scope.sellDESC), "desc");
+    	$scope.bestDeposito = tableSort(addFee("Deposito", $scope.sellDESC), "desc");
+
     	$scope.radioModoCompra = "transferencia";
     	$scope.tableBuy = addFee("Transferencia", $scope.buyASC);
     	$scope.radioModoVenta = "billetera";
     	$scope.tableSell = addFee("Wallet", $scope.sellDESC);
 
-		$scope.buttonaAction = function() {
-			if ($scope.selectedOperacion === undefined ||
-				$scope.selectedModo === undefined ||
-				$scope.selectedSitio === undefined ||
-				$scope.selectedMonto === undefined) {
-				return
-			}
+    });
 
-			$scope.transMsg = "";
-
-			if ($scope.selectedOperacion.name == "Compra") {
-
-				var newSitios = addFee($scope.selectedModo.name, $scope.sitios)
-				newSitios = newSitios.sort(function(a, b){
-					return Math.round(a.buy) - Math.round(b.buy);
-				})
-
-				var selectedSitio = _.find(newSitios, function(o) { return o.name == $scope.selectedSitio.name });
-				$scope.buyInBTC = parseFloat($scope.selectedMonto) * selectedSitio.buy;
-				$scope.buyInARS = parseFloat($scope.selectedMonto) / selectedSitio.buy;
-
-				if (selectedSitio.name == newSitios[0].name) {
-					$scope.transMsg = "Estás comprando al mejor precio!";
-				} else {
-					var newValue = parseFloat($scope.selectedMonto) / newSitios[0].buy;
-					$scope.transMsg = "Comprando en " + newSitios[0].name + " obtendrías " + newValue + " BTC";//(+" + (newValue - $scope.buyInARS) + ")";
-				}
-
-				//if ($scope.selectedSitio.cargar)
-				if ($scope.selectedModo.name == "Transferencia") {
-					$scope.questionMsg = "Fees por Transf.: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.transferencia + "%"
-				}
-				else if ($scope.selectedModo.name == "Mercadopago") {
-					$scope.questionMsg = "Fees por Mercadopago: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.mercadopago + "%"
-				}
-				else if ($scope.selectedModo.name == "Rapipago/Pagofacil") {
-					$scope.questionMsg = "Fees de Rapipago/Pagofacil: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.rapipago_pagofacil + "%"
-				}
-			}
-			else if ($scope.selectedOperacion.name == "Venta") {
-
-				var newSitios = addFee($scope.selectedModo.name, $scope.sitios)
-				newSitios = newSitios.sort(function(a, b){
-					return Math.round(b.sell) - Math.round(a.sell);
-				})
-
-				var selectedSitio = _.find(newSitios, function(o) { return o.name == $scope.selectedSitio.name });
-				$scope.sellInBTC = parseFloat($scope.selectedMonto) * selectedSitio.sell;
-
-				if (selectedSitio.name == newSitios[0].name) {
-					$scope.transMsg = "Estás vendiendo al mejor precio!";
-				} else {
-					var newValue = parseFloat($scope.selectedMonto) * newSitios[0].sell;
-					$scope.transMsg = "Vendiendo en " + newSitios[0].name + " obtendrías " + $filter('currency')(newValue, "$", 2);// + " (+" + $filter('currency')(newValue - buyInBTC, "$", 2) + ")";
-				}
-			}
-			$scope.transShow = true;
+	$scope.buttonaAction = function() {
+		if ($scope.selectedOperacion === undefined ||
+			$scope.selectedModo === undefined ||
+			$scope.selectedSitio === undefined ||
+			$scope.selectedMonto === undefined) {
+			return
 		}
-		$scope.inputChange = function() {
-			$scope.transShow = false;
-		}
-		$scope.operacionChange = function() {
-			$scope.transShow = false;
-			$scope.selectedSitio = null;
-			$scope.selectedMonto = null;
-			if ($scope.selectedOperacion.name == "Compra") {
-				$scope.modos = [{name: "Transferencia"}, {name: "Mercadopago"}, {name: "Rapipago/Pagofacil"}]
-			}
-			else if ($scope.selectedOperacion.name == "Venta") {
-				$scope.modos = [{name: "Wallet"}, {name: "Deposito"}]
-			}
-		}
-		$scope.modosChange = function() {
-			if (!$scope.selectedModo) {
-				return
-			}
+
+		$scope.transMsg = "";
+
+		if ($scope.selectedOperacion.name == "Compra") {
+
+			var newSitios;
 			if ($scope.selectedModo.name == "Transferencia") {
-				$scope.sitios = _.filter(arrs[0], function(o) { return o.cargar.hasOwnProperty("transferencia") });
-				$scope.radioModoCompra = "transferencia";
-				$scope.tableBuy = addFee("Transferencia", $scope.buyASC)
+				newSitios = $scope.bestTransferencia;
 			}
 			else if ($scope.selectedModo.name == "Mercadopago") {
-				$scope.sitios = _.filter(arrs[0], function(o) { return o.cargar.hasOwnProperty("mercadopago") });
-				$scope.radioModoCompra = "mercadopago";
-				$scope.tableBuy = addFee("Mercadopago", $scope.buyASC)
+				newSitios = $scope.bestMercadopago;
 			}
 			else if ($scope.selectedModo.name == "Rapipago/Pagofacil") {
-				$scope.sitios = _.filter(arrs[0], function(o) { return o.cargar.hasOwnProperty("rapipago_pagofacil") });
-				$scope.radioModoCompra = "rapipago";
-				$scope.tableBuy = addFee("Rapipago/Pagofacil", $scope.buyASC)
-			}
-			else if ($scope.selectedModo.name == "Wallet") {
-				$scope.sitios = _.filter(arrs[0], function(o) {
-					if (!o.hasOwnProperty("vender")) {
-						return false
-					}
-					return o.vender.hasOwnProperty("billetera")
-				});
-				$scope.radioModoVenta = "billetera";
-				$scope.tableSell = addFee("Wallet", $scope.sellDESC)
-			}
-			else if ($scope.selectedModo.name == "Deposito") {
-				$scope.sitios = _.filter(arrs[0], function(o) {
-					if (!o.hasOwnProperty("vender")) {
-						return false
-					}
-					return o.vender.hasOwnProperty("pesos")
-				});
-				$scope.radioModoVenta = "pesos";
-				$scope.tableSell = addFee("Deposito", $scope.sellDESC)
+				newSitios = $scope.bestRapipago;
 			}
 
-			$scope.transShow = false;
-			$scope.selectedMonto = null;
-		}
-		$scope.radioCompraChange = function() {
-			if ($scope.radioModoCompra == "transferencia") {
-				$scope.tableBuy = addFee("Transferencia", $scope.buyASC)
+			var selectedSitio = _.find(newSitios, function(o) { return o.name == $scope.selectedSitio.name });
+			$scope.buyInBTC = parseFloat($scope.selectedMonto) * selectedSitio.buy;
+			$scope.buyInARS = parseFloat($scope.selectedMonto) / selectedSitio.buy;
+
+			if (selectedSitio.name == newSitios[0].name) {
+				$scope.transMsg = "Estás comprando al mejor precio!";
+			} else {
+				var newValue = parseFloat($scope.selectedMonto) / newSitios[0].buy;
+				$scope.transMsg = "Comprando en " + newSitios[0].name + " obtendrías " + newValue + " BTC";//(+" + (newValue - $scope.buyInARS) + ")";
 			}
-			else if ($scope.radioModoCompra == "mercadopago") {
-				$scope.tableBuy = addFee("Mercadopago", $scope.buyASC)
+
+			if ($scope.selectedModo.name == "Transferencia") {
+				$scope.questionMsg = "Fees por Transf.: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.transferencia + "%"
 			}
-			else if ($scope.radioModoCompra == "rapipago") {
-				$scope.tableBuy = addFee("Rapipago/Pagofacil", $scope.buyASC)
+			else if ($scope.selectedModo.name == "Mercadopago") {
+				$scope.questionMsg = "Fees por Mercadopago: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.mercadopago + "%"
 			}
-		}
-		$scope.radioVenderChange = function() {
-			if ($scope.radioModoVenta == "billetera") {
-				$scope.tableSell = addFee("Wallet", $scope.sellDESC)
-			}
-			else if ($scope.radioModoVenta == "pesos") {
-				$scope.tableSell = addFee("Deposito", $scope.sellDESC)
-			}
-		}
-		$scope.filterCompra = function(element) {
-			if ($scope.radioModoCompra == "transferencia") {
-				return element.cargar.hasOwnProperty("transferencia") ? true : false
-			}
-			else if ($scope.radioModoCompra == "mercadopago") {
-				return element.cargar.hasOwnProperty("mercadopago") ? true : false
-			}
-			else if ($scope.radioModoCompra == "rapipago") {
-				return element.cargar.hasOwnProperty("rapipago_pagofacil") ? true : false
+			else if ($scope.selectedModo.name == "Rapipago/Pagofacil") {
+				$scope.questionMsg = "Fees de Rapipago/Pagofacil: " + $scope.selectedSitio.comprar + "% + " + $scope.selectedSitio.cargar.rapipago_pagofacil + "%"
 			}
 		}
-		$scope.filterVenta = function(element) {
-			if ($scope.radioModoVenta == "billetera") {
-				return element.vender.hasOwnProperty("billetera") ? true : false
+		else if ($scope.selectedOperacion.name == "Venta") {
+
+			var newSitios;
+			if ($scope.selectedModo.name == "Wallet") {
+				newSitios = $scope.bestWallet;
 			}
-			else if ($scope.radioModoVenta == "pesos") {
-				return element.vender.hasOwnProperty("pesos") ? true : false
+			else if ($scope.selectedModo.name == "Deposito") {
+				newSitios = $scope.bestDeposito;
+			}
+
+			var selectedSitio = _.find(newSitios, function(o) { return o.name == $scope.selectedSitio.name });
+			$scope.sellInBTC = parseFloat($scope.selectedMonto) * selectedSitio.sell;
+
+			if (selectedSitio.name == newSitios[0].name) {
+				$scope.transMsg = "Estás vendiendo al mejor precio!";
+			} else {
+				var newValue = parseFloat($scope.selectedMonto) * newSitios[0].sell;
+				$scope.transMsg = "Vendiendo en " + newSitios[0].name + " obtendrías " + $filter('currency')(newValue, "$", 2);// + " (+" + $filter('currency')(newValue - buyInBTC, "$", 2) + ")";
 			}
 		}
-    });
+		$scope.transShow = true;
+	}
+	$scope.inputChange = function() {
+		$scope.transShow = false;
+	}
+	$scope.operacionChange = function() {
+		$scope.transShow = false;
+		$scope.selectedSitio = null;
+		$scope.selectedMonto = null;
+		if ($scope.selectedOperacion.name == "Compra") {
+			$scope.modos = [{name: "Transferencia"}, {name: "Mercadopago"}, {name: "Rapipago/Pagofacil"}]
+		}
+		else if ($scope.selectedOperacion.name == "Venta") {
+			$scope.modos = [{name: "Wallet"}, {name: "Deposito"}]
+		}
+	}
+	$scope.modosChange = function() {
+		if (!$scope.selectedModo) {
+			return
+		}
+		if ($scope.selectedModo.name == "Transferencia") {
+			$scope.sitios = $scope.onlyTransferencia;
+			$scope.radioModoCompra = "transferencia";
+			$scope.tableBuy = $scope.bestTransferencia
+		}
+		else if ($scope.selectedModo.name == "Mercadopago") {
+			$scope.sitios = $scope.onlyMercadopago;
+			$scope.radioModoCompra = "mercadopago";
+			$scope.tableBuy = $scope.bestMercadopago
+		}
+		else if ($scope.selectedModo.name == "Rapipago/Pagofacil") {
+			$scope.sitios = $scope.onlyeRapipago;
+			$scope.radioModoCompra = "rapipago";
+			$scope.tableBuy = $scope.bestRapipago
+		}
+		else if ($scope.selectedModo.name == "Wallet") {
+			$scope.sitios = _.filter($scope.buyASC, function(o) {
+				if (!o.hasOwnProperty("vender")) {
+					return false
+				}
+				return o.vender.hasOwnProperty("billetera")
+			});
+			$scope.radioModoVenta = "billetera";
+			$scope.tableSell = $scope.bestWallet
+		}
+		else if ($scope.selectedModo.name == "Deposito") {
+			$scope.sitios = _.filter($scope.buyASC, function(o) {
+				if (!o.hasOwnProperty("vender")) {
+					return false
+				}
+				return o.vender.hasOwnProperty("pesos")
+			});
+			$scope.radioModoVenta = "pesos";
+			$scope.tableSell = $scope.bestDeposito
+		}
+
+		$scope.transShow = false;
+		$scope.selectedMonto = null;
+	}
+	$scope.radioCompraChange = function() {
+		if ($scope.radioModoCompra == "transferencia") {
+			$scope.tableBuy = $scope.bestTransferencia
+		}
+		else if ($scope.radioModoCompra == "mercadopago") {
+			$scope.tableBuy = $scope.bestMercadopago
+		}
+		else if ($scope.radioModoCompra == "rapipago") {
+			$scope.tableBuy = $scope.bestRapipago
+		}
+	}
+	$scope.radioVenderChange = function() {
+		if ($scope.radioModoVenta == "billetera") {
+			$scope.tableSell = $scope.bestWallet
+		}
+		else if ($scope.radioModoVenta == "pesos") {
+			$scope.tableSell = $scope.bestDeposito
+		}
+	}
+	$scope.filterCompra = function(element) {
+		if ($scope.radioModoCompra == "transferencia") {
+			return element.cargar.hasOwnProperty("transferencia") ? true : false
+		}
+		else if ($scope.radioModoCompra == "mercadopago") {
+			return element.cargar.hasOwnProperty("mercadopago") ? true : false
+		}
+		else if ($scope.radioModoCompra == "rapipago") {
+			return element.cargar.hasOwnProperty("rapipago_pagofacil") ? true : false
+		}
+	}
+	$scope.filterVenta = function(element) {
+		if ($scope.radioModoVenta == "billetera") {
+			return element.vender.hasOwnProperty("billetera") ? true : false
+		}
+		else if ($scope.radioModoVenta == "pesos") {
+			return element.vender.hasOwnProperty("pesos") ? true : false
+		}
+	}
 });
 
 angular.module('preciobtc.services', [])
 .factory('mySocket', function(socketFactory) {
 	var mySocket = socketFactory();
 	return mySocket;
+})
+.factory('tableSort', function() {
+	return function(json, mode) {
+		if (mode == "asc") {
+			return json.sort(function(a, b) {
+				return Math.round(a.buy) - Math.round(b.buy);
+			})
+		}
+		else if (mode == "desc") {
+			return json.sort(function(a, b) {
+				return Math.round(b.sell) - Math.round(a.sell);
+			})
+		}
+	}
 })
 .factory('generateJson', function() {
 	return function(json) {
