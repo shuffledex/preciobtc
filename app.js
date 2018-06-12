@@ -7,9 +7,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sitemap = require('express-sitemap');
 
-var indexRouter = require('./routes/index');
-
 var app = express();
+app.io = require('socket.io')();
+
+var indexRouter = require('./routes/index')(app.io);
 
 // https://prerender.io
 app.use(require('prerender-node').set('prerenderToken', 'DNctT8hQbQ0C5Kirg8EC'));

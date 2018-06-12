@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html ng-app="preciobtc">
   <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="La mejor forma de ver cómo y dónde comprar Bitcoins">
+    <meta name="keywords" content="Bitcoin, BTC, comprar, vender, calculadora">
+    <meta name="author" content="Precio BTC">
+
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600">
     <link rel="stylesheet" href="/skeleton-css/css/skeleton.css">
     <link rel="stylesheet" href="/skeleton-css/css/normalize.css">
     <link rel="stylesheet" href="/angular-tooltips/dist/angular-tooltips.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <meta name="theme-color" content="#1e88e5">
+    <meta name="msapplication-navbutton-color" content="#1e88e5"/>
+
+    <!--meta property="og:image" content="https://www.preciobtc.com/images/promo/share.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+    <meta property="og:title" content="Precio BTC" />
+    <meta property="og:description" content="La mejor forma de ver cómo y dónde comprar Bitcoins" />
+    <meta property="og:url" content="https://www.preciobtc.com/" />
+    <meta property="og:type" content="website" />
+    <link href="https://www.preciobtc.com/images/promo/share.png" rel="image_src" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@openvino">
+    <meta name="twitter:creator" content="@openvino">
+    <meta name="twitter:title" content="Precio BTC">
+    <meta name="twitter:description" content="La mejor forma de ver cómo y dónde comprar Bitcoins">
+    <meta name="twitter:image" content="https://www.preciobtc.com/images/promo/share.png"-->
+
   </head>
   <body ng-controller="mainController">
 
@@ -23,7 +47,6 @@
           <div class="two columns">
             <label for="operacion">Operación</label>
             <select class="u-full-width" id="operacion" ng-options="operacion.name for operacion in operaciones" ng-model="selectedOperacion" ng-change="operacionChange()">
-            </select>
           </div>
           <div class="two columns">
             <label for="modo">Modo <span style="font-size: 12px"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>

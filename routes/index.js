@@ -13,8 +13,11 @@ var db = admin.database();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var io = req.app.get('socketio');
-  io.on('connection', function(socket){
+  res.render('index', { title: 'Precio BTC' });
+});
+
+module.exports = function (io) {
+  io.on('connection', function (socket) {
     var ref = db.ref("sitios/ARS");
     ref.on("value", function(snapshot) {
       socket.emit('prices', snapshot.val());
@@ -22,7 +25,5 @@ router.get('/', function(req, res, next) {
       console.log("The read failed: " + errorObject.code);
     });
   });
-  res.render('index', { title: 'Precio BTC' });
-});
-
-module.exports = router;
+  return router;
+};
