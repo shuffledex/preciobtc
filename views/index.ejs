@@ -18,38 +18,40 @@
         <h2>Calculá el valor de tu operación de Bitcoins</h2>
         <p>Compara y elige tu Mejor Opción</p>
       </div>
-      <div class="row form">
-        <div class="two columns">
-          <label for="operacion">Operación</label>
-          <select class="u-full-width" id="operacion" ng-options="operacion.name for operacion in operaciones" ng-model="selectedOperacion" ng-change="operacionChange()">
-          </select>
-        </div>
-        <div class="two columns">
-          <label for="modo">Modo <span style="font-size: 12px"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>
-          <select class="u-full-width" id="modo" ng-options="modo.name for modo in modos" ng-model="selectedModo" ng-change="modosChange()">
-          </select>
-        </div>
-        <div class="two columns">
-          <label for="sitio">Plataforma</label>
-          <select class="u-full-width" id="sitio" ng-options="sitio.name for sitio in sitios" ng-model="selectedSitio" ng-change="inputChange()">
-          </select>
-        </div>
-        <div class="two columns">
-          <div class="row">
-            <div class="ten columns inputMonto">
-              <label for="monto">Monto</label>
-              <input class="u-full-width" type="text" placeholder="" id="monto" ng-model="selectedMonto" ng-change="inputChange()">
-            </div>
-            <div class="two columns iconMonto" style="margin-top: 42px; font-weight: bold;">
-              <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
-              <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;color: #EE8337;"></i></span>
+      <form name="calcForm">
+        <div class="row form">
+          <div class="two columns">
+            <label for="operacion">Operación</label>
+            <select class="u-full-width" id="operacion" ng-options="operacion.name for operacion in operaciones" ng-model="selectedOperacion" ng-change="operacionChange()">
+            </select>
+          </div>
+          <div class="two columns">
+            <label for="modo">Modo <span style="font-size: 12px"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>
+            <select class="u-full-width" id="modo" ng-options="modo.name for modo in modos" ng-model="selectedModo" ng-change="modosChange()">
+            </select>
+          </div>
+          <div class="two columns">
+            <label for="sitio">Plataforma</label>
+            <select class="u-full-width" id="sitio" ng-options="sitio.name for sitio in sitios" ng-model="selectedSitio" ng-change="inputChange()">
+            </select>
+          </div>
+          <div class="two columns">
+            <div class="row">
+              <div class="ten columns inputMonto">
+                <label for="monto">Monto</label>
+                <input class="u-full-width" type="text" placeholder="" id="monto" name="monto" ng-pattern="/^[0-9\.]*$/" required ng-model="selectedMonto" ng-change="inputChange()">
+              </div>
+              <div class="two columns iconMonto" style="margin-top: 42px; font-weight: bold;">
+                <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
+                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;color: #EE8337;"></i></span>
+              </div>
             </div>
           </div>
+          <div class="four columns">
+            <button class="button button-primary u-full-width" ng-click="buttonaAction()" ng-disabled="transShow || calcForm.monto.$error.pattern">Calcular</button>
+          </div>
         </div>
-        <div class="four columns">
-          <button class="button button-primary u-full-width" ng-click="buttonaAction()" ng-disabled="transShow">Calcular</button>
-        </div>
-      </div>
+      </form>
       <div class="row animate-if" ng-if="transShow">
         <div class="transCard">
             <i class="btc-icon fab fa-bitcoin"></i>
