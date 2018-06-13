@@ -5,10 +5,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var sitemap = require('express-sitemap');
+var sm = require('sitemap');
 
 var app = express();
 app.io = require('socket.io')();
+
+var sitemap = sm.createSitemap ({
+  hostname: 'https://www.preciobtc.com',
+  cacheTime: 600000,
+  urls: [
+    {url: '/', changefreq: 'daily', priority: 1}
+  ]
+});
 
 var indexRouter = require('./routes/index')(app.io);
 
@@ -29,22 +37,19 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 
 app.use('/', indexRouter);
 
-var map = sitemap({
-  map: {
-    '/': ['get']
-  },
-  route: {
-    '/': {
-      changefreq: 'always',
-      priority: 1.0,
+app.get('/sitemap.xml', function(req, res) {
+  sitemap.toXML( function (err, xml) {
+    if (err) {
+      return res.status(500).end();
     }
-  }
+    res.header('Content-Type', 'application/xml');
+    res.send( xml );
+  });
 });
 
-app.get('/sitemap.xml', function(req, res) {
-  map.XMLtoWeb(res);
-}).get('/robots.txt', function(req, res) {
-  map.TXTtoWeb(res);
+app.get('/robots.txt', function (req, res) {
+  res.type('text/plain');
+  res.send("User-agent: *\nDisallow:");
 });
 
 // catch 404 and forward to error handler
