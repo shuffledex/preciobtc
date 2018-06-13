@@ -255,10 +255,13 @@ span.question {
   opacity:1; }
 footer {
   color: #616366;
-  padding: 58px 128px;
+  padding: 58px 28px;
   background: white;}
 footer .row {
-   } 
+   }
+footer .ssl {
+  text-align: center;
+  margin-top: 12px; }
 @-moz-keyframes blinker {
   0% {
     opacity: 1.0;
@@ -313,6 +316,8 @@ footer .row {
     font-size: 13px; }
   .middle h5 {
     font-size: 2.4rem; }
+  footer {
+    padding: 58px 128px;}
 }
 @media (min-width: 1000px) {
   .form {
