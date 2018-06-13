@@ -13,7 +13,7 @@ var db = admin.database();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Precio BTC' });
+  res.render('index', { title: 'Precio Bitcoin' });
 });
 
 module.exports = function (io) {

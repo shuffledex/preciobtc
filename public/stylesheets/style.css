@@ -63,7 +63,8 @@ form {
   text-transform: uppercase;
   letter-spacing: .1rem; 
   margin: 0;
-  color: #aaa; }
+  font-size: 2.4rem;
+  color: black; }
 .middle ul {
   margin: 0 auto;
   width: 100%;
@@ -287,7 +288,7 @@ span.question {
 }
 @media (min-width: 550px) {
   .form {
-    width:725px;}
+    width:625px;}
   .inputMonto {
     width: 100%; }
   .iconMonto {
@@ -304,6 +305,8 @@ span.question {
     margin-top: 0; }
   .rapipago, .transferencia, .mercadopago {
     font-size: 13px; }
+  .middle h5 {
+    font-size: 2.4rem; }
 }
 @media (min-width: 1000px) {
   .form {

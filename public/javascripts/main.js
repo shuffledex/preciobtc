@@ -1,6 +1,6 @@
 angular.module('preciobtc.controllers', [])
 .constant('_', window._)
-.controller('mainController', function($scope, $filter, mySocket, generateJson, addFee, tableSort) {
+.controller('mainController', function($scope, $filter, $document, mySocket, generateJson, addFee, tableSort) {
     mySocket.on('prices', function (ev, data) {
     	var arrs = generateJson(ev);
 
@@ -98,6 +98,8 @@ angular.module('preciobtc.controllers', [])
 			}
 		}
 		$scope.transShow = true;
+	    var card = angular.element(document.getElementById('card'));
+	    $document.scrollToElementAnimated(card);
 	}
 	$scope.inputChange = function() {
 		$scope.transShow = false;
@@ -382,6 +384,7 @@ angular.module('preciobtc', [
 	'btford.socket-io',
 	'ngAnimate',
 	'720kb.tooltips',
+	'duScroll',
 	'preciobtc.controllers',
 	'preciobtc.services'
 ]);

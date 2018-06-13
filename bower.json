@@ -15,6 +15,7 @@
     "angular": "1.6.10",
     "angular-socket-io": "^0.7.0",
     "angular-animate": "^1.7.1",
-    "angular-tooltips": "^1.2.2"
+    "angular-tooltips": "^1.2.2",
+    "angular-scroll": "^1.0.2"
   }
 }
