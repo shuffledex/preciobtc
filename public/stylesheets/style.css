@@ -82,6 +82,10 @@ form {
 .middle li:last-child::after {
   padding: 0;
   content: ""; }
+.green {
+  color: #5eaf41;
+  font-weight: 600;
+  font-size: 14px;}
 .container.two {
   margin-bottom: 100px;}
 .tap:hover {
