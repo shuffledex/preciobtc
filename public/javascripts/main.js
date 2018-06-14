@@ -1,6 +1,7 @@
 angular.module('preciobtc.controllers', [])
 .constant('_', window._)
 .controller('mainController', function($scope, $filter, $document, mySocket, generateJson, addFee, tableSort) {
+
     mySocket.on('prices', function (ev, data) {
     	var arrs = generateJson(ev);
 
@@ -31,6 +32,18 @@ angular.module('preciobtc.controllers', [])
     	$scope.radioModoVenta = "billetera";
     	$scope.tableSell = addFee("Wallet", $scope.sellDESC);
 
+    });
+
+    mySocket.on('dolar', function (ev, data) {
+    	$scope.dolar = ev;
+    });
+
+    mySocket.on('bitfinex', function (ev, data) {
+    	$scope.bitfinex = ev;
+    });
+
+    mySocket.on('bitstamp', function (ev, data) {
+    	$scope.bitstamp = ev;
     });
 
 	$scope.buttonaAction = function() {

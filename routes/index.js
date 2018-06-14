@@ -18,12 +18,35 @@ router.get('/', function(req, res, next) {
 
 module.exports = function (io) {
   io.on('connection', function (socket) {
-    var ref = db.ref("sitios/ARS");
-    ref.on("value", function(snapshot) {
+    var refSitios = db.ref("sitios/ARS");
+    var refDolar = db.ref("dolar/ARS");
+    var refBitfinex = db.ref("bitfinex");
+    var refBitstamp = db.ref("bitstamp");
+
+    refSitios.on("value", function(snapshot) {
       socket.emit('prices', snapshot.val());
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
+
+    refDolar.on("value", function(snapshot) {
+      socket.emit('dolar', snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+
+    refBitfinex.on("value", function(snapshot) {
+      socket.emit('bitfinex', snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+
+    refBitstamp.on("value", function(snapshot) {
+      socket.emit('bitstamp', snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+
   });
   return router;
 };

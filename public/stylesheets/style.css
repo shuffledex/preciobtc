@@ -2,6 +2,9 @@ body {
   background-image: linear-gradient(to right, #0B4182 0%, #1e88e5 51%, #40BAF5 100%); }
 h2, h3, h4, label {
   color: white; }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -16,6 +19,8 @@ select {
   border-radius: 8px; }
 form {
   margin: 0; }
+.hide {
+  display: block; }
 .form {
   width:290px;
   margin:0 auto;}
@@ -24,6 +29,31 @@ form {
 .iconMonto {
   width: 20%;
   padding-left: 10px }
+.container.ticker {
+  width: 100%;
+  max-width: 100%;
+  background: #3B444C;
+  padding: 10px;
+  color: white; }
+.ticker ul {
+  display: inline;
+  margin: 0 auto;
+  width: 100%;
+  list-style-type: none;
+  text-align: right;
+  padding: 0; }
+.ticker li {
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  font-size: 12px;
+  margin: 0; }
+.ticker .green {
+  font-size: 14px; } 
+.ticker .six {
+  width: 50%; }
+.dolar li {
+  text-align: left; }
 .container.one {
   width: 100%;
   max-width: 100%;
@@ -58,12 +88,12 @@ form {
   background: #DDD;
   -webkit-box-shadow: 0 1rem 3.5rem  rgba(0,0,0,.2);
   box-shadow: 0 1rem 3.5rem  rgba(0,0,0,.2);
-  padding: 20px 0;}
+  padding: 20px 5px;}
 .middle h5 {
   text-transform: uppercase;
   letter-spacing: .1rem; 
   margin: 0;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: black; }
 .middle ul {
   margin: 0 auto;
@@ -296,8 +326,16 @@ footer .ssl {
   }
 }
 @media (min-width: 550px) {
+  .hide {
+    display: none !important; }
+  .ticker ul {
+    display: block; }
+  .ticker li {
+    display: inline; }
+  .ticker .six {
+    width: 48%; } 
   .form {
-    width:625px;}
+    width:625px; }
   .inputMonto {
     width: 100%; }
   .iconMonto {
@@ -310,6 +348,8 @@ footer .ssl {
     width: 424px;}
   .container.one label {
     margin-top: 0; }
+  .container.one {
+    padding: 88px 0; }
   .tablaVenta {
     margin-top: 0; }
   .rapipago, .transferencia, .mercadopago {

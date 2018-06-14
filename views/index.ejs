@@ -41,8 +41,27 @@
     </script>
 
   </head>
-  <body ng-controller="mainController">
+  <body ng-controller="mainController" ng-cloak>
 
+    <div class="container ticker">
+      <div class="row">
+        <div class="six columns dolar">
+          <ul style="text-align: left">
+            <li>Dolar oficial venta </li>
+            <li class="green">{{ dolar.venta | currency:"$ ":2 }}</li>
+          </ul>
+        </div>
+        <div class="six columns">
+          <ul>
+            <li>Bitfinex</li>
+            <li class="green">{{ bitfinex.last_price | currency:"USD ":2 }}</li>
+            <li>·</li>
+            <li>Bitstamp</li>
+            <li class="green">{{ bitstamp.last | currency:"USD ":2 }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="container one">
       <div class="row trans">
         <h2>Calculá el valor de tu operación de Bitcoins</h2>
@@ -193,6 +212,14 @@
         <a href="https://www.positivessl.com/" id="comodoTL">Positive SSL</a>
       </div>
     </footer>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120828562-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-120828562-1');
+    </script>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/angular/angular.min.js"></script>
