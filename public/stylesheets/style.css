@@ -35,6 +35,8 @@ form {
   background: #3B444C;
   padding: 10px;
   color: white; }
+.ticker .row {
+  padding: 0 12px; }
 .ticker ul {
   display: inline;
   margin: 0 auto;
@@ -328,6 +330,8 @@ footer .ssl {
 @media (min-width: 550px) {
   .hide {
     display: none !important; }
+  .ticker .row {
+    padding: 0 128px; }
   .ticker ul {
     display: block; }
   .ticker li {
@@ -335,7 +339,7 @@ footer .ssl {
   .ticker .six {
     width: 48%; } 
   .form {
-    width:625px; }
+    width: 625px; }
   .inputMonto {
     width: 100%; }
   .iconMonto {

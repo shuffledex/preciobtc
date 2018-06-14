@@ -47,8 +47,11 @@
       <div class="row">
         <div class="six columns dolar">
           <ul style="text-align: left">
-            <li>Dolar oficial venta </li>
+            <li>Dolar venta</li>
             <li class="green">{{ dolar.venta | currency:"$ ":2 }}</li>
+            <li>·</li>
+            <li>Dolar compra</li>
+            <li class="green">{{ dolar.compra | currency:"$ ":2 }}</li>
           </ul>
         </div>
         <div class="six columns">
