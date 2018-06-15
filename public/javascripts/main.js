@@ -14,8 +14,8 @@ angular.module('preciobtc.controllers', [])
     	$scope.monedas = [{name: "BTC"}, {name: "ARS"}];
     	$scope.operaciones = [{name: "Compra"}, {name: "Venta"}];
 
-    	$scope.buyASC = arrs[0];
-    	$scope.sellDESC = arrs[1];
+    	$scope.buyASC = _.filter(arrs[0], function(o) { return o.buy != 0 });
+    	$scope.sellDESC = _.filter(arrs[1], function(o) { return o.sell != 0 });
 
     	$scope.onlyTransferencia = _.filter($scope.buyASC, function(o) { return o.cargar.hasOwnProperty("transferencia") });
     	$scope.bestTransferencia = tableSort(addFee("Transferencia", $scope.onlyTransferencia), "asc");
