@@ -38,12 +38,27 @@ angular.module('preciobtc.controllers', [])
     	$scope.dolar = ev;
     });
 
+    $scope.mercados = [];
+    precioMercados = [];
+    precioMercados['bitfinex'] = 0;
+    precioMercados['bitstamp'] = 0;
+
     mySocket.on('bitfinex', function (ev, data) {
     	$scope.bitfinex = ev;
+      precioMercados['bitfinex'] = ev.last_price;
+    	if (!_.find($scope.mercados, function(o) { return o.name == "Bitfinex" })) {
+    		$scope.mercados.push({name: 'Bitfinex'});
+    		$scope.selectedMercadoCompra = $scope.selectedMercadoVenta = $scope.mercados[0];
+    	}
     });
 
     mySocket.on('bitstamp', function (ev, data) {
     	$scope.bitstamp = ev;
+      precioMercados['bitstamp'] = ev.last;
+    	if (!_.find($scope.mercados, function(o) { return o.name == "Bitstamp" })) {
+	    	$scope.mercados.push({name: 'Bitstamp'});
+	    	$scope.selectedMercadoCompra = $scope.selectedMercadoVenta = $scope.mercados[0];
+    	}
     });
 
 	$scope.buttonaAction = function() {
@@ -391,6 +406,14 @@ angular.module('preciobtc.services', [])
 		}
 		return newSitios
 	}
+})
+.filter('mercado', function() {
+	return function(input, mercado, dolar) {
+    if (mercado && dolar) {
+      return (((parseFloat(dolar) * parseFloat(precioMercados[ (mercado.name).toLowerCase() ])) / parseFloat(input)) - 1) * -100
+    }
+    return "?"
+	};
 })
 
 angular.module('preciobtc', [
