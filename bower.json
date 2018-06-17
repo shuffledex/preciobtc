@@ -16,6 +16,7 @@
     "angular-socket-io": "^0.7.0",
     "angular-animate": "^1.7.1",
     "angular-tooltips": "^1.2.2",
-    "angular-scroll": "^1.0.2"
+    "angular-scroll": "^1.0.2",
+    "flag-icon-css": "^3.1.0"
   }
 }

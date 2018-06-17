@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="/skeleton-css/css/skeleton.css">
     <link rel="stylesheet" href="/skeleton-css/css/normalize.css">
     <link rel="stylesheet" href="/angular-tooltips/dist/angular-tooltips.min.css">
+    <link rel="stylesheet" href="/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
-    <meta name="theme-color" content="#1e88e5">
-    <meta name="msapplication-navbutton-color" content="#1e88e5"/>
+    <meta name="theme-color" content="#7051BE">
+    <meta name="msapplication-navbutton-color" content="#7051BE"/>
 
     <!--meta property="og:image" content="https://www.preciobtc.com/images/promo/share.png" />
     <meta property="og:image:width" content="1200" />
@@ -43,6 +44,22 @@
   </head>
   <body ng-controller="mainController" ng-cloak>
 
+    <header class="header">
+      <div class="topnav" id="myTopnav">
+        <a href="#home" class="home">Home</a>
+        <div class="secciones">
+          <a href="#about">Mercado P2P</a>
+          <a href="#contact">Mejores Precios</a>
+          <a href="#news">Calculadora</a>
+          <a href="#news">Contacto</a>
+          <a href=""><span class="flag-icon flag-icon-ar"></span></a>
+          <a href="javascript:void(0);" class="icon" ng-click="openMenu()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
     <div class="container ticker">
       <div class="row">
         <div class="six columns dolar">
@@ -56,8 +73,7 @@
         </div>
         <div class="six columns">
           <ul>
-            <li><i class="fas fa-question-circle" tooltips tooltip-template="Mercados referentes" tooltip-size="smalll" tooltip-side="left"></i></li>
-            <li>Bitfinex</li>
+            <li><i class="fas fa-question-circle" tooltips tooltip-template="Mercados referentes" tooltip-size="smalll" tooltip-side="left"></i> Bitfinex</li>
             <li class="green">{{ bitfinex.last_price | currency:"USD ":2 }}</li>
             <li>·</li>
             <li>Bitstamp</li>
@@ -66,6 +82,7 @@
         </div>
       </div>
     </div>
+
     <div class="container one">
       <div class="row trans">
         <h2>Calculá el valor de tu operación de Bitcoins</h2>
@@ -94,9 +111,9 @@
                 <label for="monto">Monto</label>
                 <input class="u-full-width" type="text" placeholder="" id="monto" name="monto" ng-pattern="/^[0-9\.]*$/" required ng-model="selectedMonto" ng-change="inputChange()">
               </div>
-              <div class="two columns iconMonto" style="margin-top: 42px; font-weight: bold;">
+              <div class="two columns iconMonto">
                 <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
-                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;color: #EE8337;"></i></span>
+                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;"></i></span>
               </div>
             </div>
           </div>
@@ -137,7 +154,7 @@
       </div>
       <div class="row">
         <div class="six columns">
-          <h4 style="margin:0;">Comprar 1 BTC te saldrá...</h4>
+          <h4>Comprar 1 BTC te saldrá...</h4>
 
           <div class="row medios">
             <h5>Modo de compra <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para cargar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
@@ -172,16 +189,16 @@
           </div>
 
           <div class="example-grid docs-example">
-            <div class="row tap" ng-repeat="(key, value) in tableBuy | filter: filterCompra | orderBy: 'buy'" ng-class="{opacity1: key == 0, opacity2: key == 1, opacity3: key == 2, opacity4: key == 3, opacity5: key == 4, opacity6: key == 5, opacity7: key == 6, opacity8: key == 7, opacity9: key == 8, opacity10: key == 9 }">
+            <div class="row tap" ng-repeat="(key, value) in tableBuy | filter: filterCompra | orderBy: 'buy'">
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="five columns right">{{ value.name }}</div>
               <div class="four columns left">{{ value.buy | currency }}</div>
-              <div class="two columns autohHover">{{ value.buy | mercado:selectedMercadoCompra:dolar.venta | currency:"+":2 }}%</div>
+              <div class="two columns">{{ value.buy | mercado:selectedMercadoCompra:dolar.venta | currency:"+":2 }}%</div>
             </div>
           </div>
         </div>
         <div class="six columns tablaVenta">
-          <h4 style="margin:0;">Vendiendo 1 BTC te darán...</h4>
+          <h4>Vendiendo 1 BTC te darán...</h4>
 
           <div class="row medios">
             <h5>Modo de venta <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para retirar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
@@ -210,11 +227,11 @@
           </div>
 
           <div class="example-grid docs-example">
-            <div class="row tap" ng-repeat="(key, value) in tableSell | filter: filterVenta | orderBy: '-sell'" ng-class="{opacity1: key == 0, opacity2: key == 1, opacity3: key == 2, opacity4: key == 3, opacity5: key == 4, opacity6: key == 5, opacity7: key == 6, opacity8: key == 7, opacity9: key == 8, opacity10: key == 9 }">
+            <div class="row tap" ng-repeat="(key, value) in tableSell | filter: filterVenta | orderBy: '-sell'">
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="five columns right">{{ value.name }}</div>
               <div class="four columns left">{{ value.sell | currency }}</div>
-              <div class="two columns autohHover">{{ value.sell | mercado:selectedMercadoVenta:dolar.compra | currency:"+":2 }}%</div>
+              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.compra | currency:"+":2 }}%</div>
             </div>
           </div>
         </div>
@@ -223,11 +240,20 @@
 
     <footer>
       <div class="row">
-        <div class="six columns">
-          Copyright 2018 © Precio Bitcoin. Todos los derechos reservados.
+        <div class="four columns copyright">
+          Copyright 2018 © Precio Bitcoin.
         </div>
-        <div class="four columns">&nbsp;</div>
-        <div class="two columns"></div>
+        <div class="four columns">
+          -
+        </div>
+        <div class="four columns">
+          <ul class="secciones">
+            <li><a href="">Mercado p2p</a></li>
+            <li><a href="">Mejores Precios</a></li>
+            <li><a href="">Calculadora</a></li>
+            <li><a href="">Contacto</a></li>
+          </ul>
+        </div>
       </div>
       <div class="row ssl">
         <script language="JavaScript" type="text/javascript">

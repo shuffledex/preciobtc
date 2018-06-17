@@ -61,6 +61,15 @@ angular.module('preciobtc.controllers', [])
     	}
     });
 
+    $scope.openMenu = function() {
+	    var x = document.getElementById("myTopnav");
+	    if (x.className === "topnav") {
+	        x.className += " responsive";
+	    } else {
+	        x.className = "topnav";
+	    }
+    }
+
 	$scope.buttonaAction = function() {
 		if ($scope.selectedOperacion === undefined ||
 			$scope.selectedModo === undefined ||
