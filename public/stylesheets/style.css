@@ -55,11 +55,16 @@ form {
   width: 20%;
   margin-top: 50px;
   padding-left: 10px }
-.container.header {
+header {
+  height: 60px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
   width: 100%;
   max-width: 100%;
   background: #7051BE; }
 .container.ticker {
+  margin-top: 60px;
   width: 100%;
   max-width: 100%;
   background: #7051BE;
@@ -411,7 +416,7 @@ footer .secciones li {
   h2 {
     font-size: 5.2rem; }
   .topnav {
-    padding: 10px 122px; }
+    padding: 0 122px; }
   .hide {
     display: none !important; }
   .ticker .row {
