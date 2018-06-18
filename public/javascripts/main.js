@@ -424,6 +424,16 @@ angular.module('preciobtc.services', [])
     return "?"
 	};
 })
+.directive('header', function () {
+	return {
+		restrict: 'EA',       
+		scope: {
+			active: '@'
+		},
+		templateUrl: '../views/menu.html',
+		link: function ($scope, element, attrs) { } //DOM manipulation
+  }
+})
 
 angular.module('preciobtc', [
 	'btford.socket-io',

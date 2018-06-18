@@ -21,7 +21,7 @@ select {
 form {
   margin: 0; }
 .topnav {
-  padding: 0 6px;
+  padding: 4px 6px;
   overflow: hidden;
   background-color: #7051BE; }
 .topnav .secciones {
@@ -416,7 +416,7 @@ footer .secciones li {
   h2 {
     font-size: 5.2rem; }
   .topnav {
-    padding: 0 122px; }
+    padding: 4px 122px; }
   .hide {
     display: none !important; }
   .ticker .row {
