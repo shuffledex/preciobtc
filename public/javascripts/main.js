@@ -297,7 +297,7 @@ angular.module('preciobtc.services', [])
 			vender: json["BuenBit"].vender,
 			type: json["BuenBit"].type
 		})
-		arr.push({
+		/*arr.push({
 			name: "CoinASAP",
 			buy: json["CoinASAP"].buy,
 			sell: json["CoinASAP"].sell,
@@ -306,7 +306,7 @@ angular.module('preciobtc.services', [])
 			comprar: json["CoinASAP"].comprar,
 			vender: json["CoinASAP"].vender,
 			type: json["CoinASAP"].type
-		})
+		})*/
 		arr.push({
 			name: "CryptoMKT",
 			buy: json["CryptoMKT"].buy,
@@ -373,7 +373,7 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				_sitio.buy = _sitio.buy + (_sitio.buy * _sitio.cargar.transferencia) + (_sitio.buy * _sitio.comprar)
+				_sitio.buy = _sitio.buy - (_sitio.buy * _sitio.cargar.transferencia) - (_sitio.buy * _sitio.comprar)
 				newSitios.push(_sitio)
 			})
 		}
@@ -381,7 +381,7 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				_sitio.buy = _sitio.buy + (_sitio.buy * _sitio.cargar.mercadopago) + (_sitio.buy * _sitio.comprar)
+				_sitio.buy = _sitio.buy - (_sitio.buy * _sitio.cargar.mercadopago) - (_sitio.buy * _sitio.comprar)
 				newSitios.push(_sitio)
 			})
 		}
@@ -389,7 +389,7 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				_sitio.buy = _sitio.buy + (_sitio.buy * _sitio.cargar.rapipago_pagofacil) + (_sitio.buy * _sitio.comprar)
+				_sitio.buy = _sitio.buy - (_sitio.buy * _sitio.cargar.rapipago_pagofacil) - (_sitio.buy * _sitio.comprar)
 				newSitios.push(_sitio)
 			})
 		}
@@ -424,6 +424,7 @@ angular.module('preciobtc.services', [])
     return "?"
 	};
 })
+/*
 .directive('header', function () {
 	return {
 		restrict: 'EA',       
@@ -433,7 +434,7 @@ angular.module('preciobtc.services', [])
 		templateUrl: '../views/menu.html',
 		link: function ($scope, element, attrs) { } //DOM manipulation
   }
-})
+})*/
 
 angular.module('preciobtc', [
 	'btford.socket-io',

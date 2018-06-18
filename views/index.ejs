@@ -44,7 +44,7 @@
   </head>
   <body ng-controller="mainController" ng-cloak>
 
-    <div menu active='home'></div>
+    <!--div menu active='home'></div-->
 
     <header class="header">
       <div class="topnav" id="myTopnav">
@@ -194,7 +194,7 @@
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="five columns right">{{ value.name }}</div>
               <div class="four columns left">{{ value.buy | currency }}</div>
-              <div class="two columns">{{ value.buy | mercado:selectedMercadoCompra:dolar.venta | currency:"+":2 }}%</div>
+              <div class="two columns">{{ value.buy | mercado:selectedMercadoCompra:dolar.venta | currency:"":2 }}%</div>
             </div>
           </div>
         </div>
@@ -232,7 +232,7 @@
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="five columns right">{{ value.name }}</div>
               <div class="four columns left">{{ value.sell | currency }}</div>
-              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.compra | currency:"+":2 }}%</div>
+              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.compra | currency:"":2 }}%</div>
             </div>
           </div>
         </div>
