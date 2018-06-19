@@ -61,15 +61,6 @@ angular.module('preciobtc.controllers', [])
     	}
     });
 
-    $scope.openMenu = function() {
-	    var x = document.getElementById("myTopnav");
-	    if (x.className === "topnav") {
-	        x.className += " responsive";
-	    } else {
-	        x.className = "topnav";
-	    }
-    }
-
 	$scope.buttonaAction = function() {
 		if ($scope.selectedOperacion === undefined ||
 			$scope.selectedModo === undefined ||
@@ -431,7 +422,16 @@ angular.module('preciobtc.services', [])
 			active: '@'
 		},
 		templateUrl: '../views/menu.html',
-		link: function ($scope, element, attrs) { } //DOM manipulation
+		link: function ($scope, element, attrs) {
+		    $scope.openMenu = function() {
+			    var x = document.getElementById("myTopnav");
+			    if (x.className === "topnav") {
+			        x.className += " responsive";
+			    } else {
+			        x.className = "topnav";
+			    }
+		    }
+		}
   }
 })
 .directive('pie', function () {
