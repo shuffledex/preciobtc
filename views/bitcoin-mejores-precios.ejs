@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="preciobtc">
   <head>
-    <title>Precio Bitcoin</title>
+    <title>Mejores precios de compra y venta de bitcoin</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="La mejor forma de ver cómo y dónde comprar Bitcoin">
-    <meta name="keywords" content="Bitcoin, BTC, Comprar, Vender, Calculadora, Precio, Criptomoneda, Invertir, Latinoamerica, Exchange">
+    <meta name="description" content="Compara de forma facil donde comprar y vender bitcoin al mejor precio">
+    <meta name="keywords" content="Operacion, Calculadora, Opcion, Transferencia, Mercadopago, Pagofacil, Rapipago, Efectivo, Pesos, Dolar, Bitcoin">
     <meta name="author" content="PrecioBTC">
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600">
@@ -23,16 +23,16 @@
     <!--meta property="og:image" content="https://www.preciobtc.com/images/promo/share.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="627" /-->
-    <meta property="og:title" content="Precio Bitcoin" />
-    <meta property="og:description" content="La mejor forma de ver cómo y dónde comprar Bitcoin" />
-    <meta property="og:url" content="https://www.preciobtc.com/" />
+    <meta property="og:title" content="Mejores precios de compra y venta de bitcoin" />
+    <meta property="og:description" content="Compara de forma facil donde comprar y vender bitcoin al mejor precio" />
+    <meta property="og:url" content="https://www.preciobtc.com/bitcoin-mejores-precios" />
     <meta property="og:type" content="website" />
     <!--link href="https://www.preciobtc.com/images/promo/share.png" rel="image_src" /-->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@preciobtc">
     <meta name="twitter:creator" content="@preciobtc">
-    <meta name="twitter:title" content="Precio Bitcoin">
-    <meta name="twitter:description" content="La mejor forma de ver cómo y dónde comprar Bitcoins">
+    <meta name="twitter:title" content="Mejores precios de compra y venta de bitcoin">
+    <meta name="twitter:description" content="Compara de forma facil donde comprar y vender bitcoin al mejor precio">
     <!--meta name="twitter:image" content="https://www.preciobtc.com/images/promo/share.png"-->
 
     <script type="text/javascript">
@@ -67,61 +67,6 @@
             <li class="green">{{ bitstamp.last | currency:"USD ":2 }}</li>
           </ul>
         </div>
-      </div>
-    </div>
-
-    <div class="container one">
-      <div class="row trans">
-        <h2>Calculá el valor de tu operación de Bitcoins</h2>
-        <p>Compara y elige tu Mejor Opción</p>
-      </div>
-      <form name="calcForm">
-        <div class="row form">
-          <div class="two columns">
-            <label for="operacion">Operación</label>
-            <select class="u-full-width" id="operacion" ng-options="operacion.name for operacion in operaciones" ng-model="selectedOperacion" ng-change="operacionChange()">
-            </select>
-          </div>
-          <div class="two columns">
-            <label for="modo">Modo <span style="font-size: 12px"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>
-            <select class="u-full-width" id="modo" ng-options="modo.name for modo in modos" ng-model="selectedModo" ng-change="modosChange()">
-            </select>
-          </div>
-          <div class="two columns">
-            <label for="sitio">Plataforma</label>
-            <select class="u-full-width" id="sitio" ng-options="sitio.name for sitio in sitios" ng-model="selectedSitio" ng-change="inputChange()">
-            </select>
-          </div>
-          <div class="two columns">
-            <div class="row">
-              <div class="ten columns inputMonto">
-                <label for="monto">Monto</label>
-                <input class="u-full-width" type="text" placeholder="" id="monto" name="monto" ng-pattern="/^[0-9\.]*$/" required ng-model="selectedMonto" ng-change="inputChange()">
-              </div>
-              <div class="two columns iconMonto">
-                <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
-                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="four columns">
-            <button class="button button-primary u-full-width" ng-click="buttonaAction()" ng-disabled="transShow || calcForm.monto.$error.pattern">Calcular</button>
-          </div>
-        </div>
-      </form>
-      <div id="card"></div>
-      <div class="row animate-if" ng-if="transShow">
-        <div class="transCard">
-            <i class="btc-icon fab fa-bitcoin"></i>
-            <div class="header">
-              <h5>{{ selectedSitio.name }} <span style="font-size: 14px"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
-            </div>
-            <ul>
-              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>
-              <li ng-show="selectedOperacion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"$":2 }}</strong></li>
-            </ul>
-        </div>
-        <p class="msg"><i class="fas fa-bullhorn"></i> {{ transMsg }}</p>
       </div>
     </div>
 

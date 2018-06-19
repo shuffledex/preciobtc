@@ -347,7 +347,7 @@ span.question {
   opacity:1; }
 footer {
   background: #7051BE;
-  padding: 58px 28px;
+  padding: 58px 28px 0 28px;
   font-size: 1.4rem;
   color: #c7b4fa; }
 footer ul {
@@ -366,13 +366,16 @@ footer li a {
   margin: 0; }
 footer li a:hover {
   color: #C6B9E5; }
-footer .ssl {
+.ssl {
+  background-color: #7051BE;
+  margin: 0 !important;
+  height: 60px;
   text-align: center;
   margin-top: 12px; }
 #comodoTL {
   padding: 0 !important; }
-footer .ssl a,
-footer .ssl a:hover {
+.ssl a,
+.ssl a:hover {
   color: white;
   text-decoration: none; }
 footer .copyright {
@@ -464,7 +467,7 @@ footer .secciones li {
     margin-bottom: 0;
     width: auto; }
   footer {
-    padding: 58px 128px;}
+    padding: 58px 128px 0 128px;}
   footer .copyright {
     text-align: left; }
   footer .secciones li {

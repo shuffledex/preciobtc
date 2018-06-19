@@ -424,8 +424,7 @@ angular.module('preciobtc.services', [])
     return "?"
 	};
 })
-/*
-.directive('header', function () {
+.directive('menu', function () {
 	return {
 		restrict: 'EA',       
 		scope: {
@@ -434,7 +433,17 @@ angular.module('preciobtc.services', [])
 		templateUrl: '../views/menu.html',
 		link: function ($scope, element, attrs) { } //DOM manipulation
   }
-})*/
+})
+.directive('pie', function () {
+	return {
+		restrict: 'EA',  
+		replace: true,   
+		scope: {},
+		templateUrl: '../views/pie.html',
+		link: function ($scope, element, attrs) {
+		}
+  }
+})
 
 angular.module('preciobtc', [
 	'btford.socket-io',

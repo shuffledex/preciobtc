@@ -11,9 +11,16 @@ admin.initializeApp({
 
 var db = admin.database();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Precio Bitcoin' });
+  res.render('index', {});
+});
+
+router.get('/bitcoin-mejores-precios', function(req, res, next) {
+  res.render('bitcoin-mejores-precios', {});
+});
+
+router.get('/bitcoin-calculadora', function(req, res, next) {
+  res.render('bitcoin-calculadora', {});
 });
 
 module.exports = function (io) {

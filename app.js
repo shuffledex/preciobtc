@@ -14,7 +14,10 @@ var sitemap = sm.createSitemap ({
   hostname: 'https://www.preciobtc.com',
   cacheTime: 600000,
   urls: [
-    {url: '/', changefreq: 'daily', priority: 1}
+    {url: '/', changefreq: 'daily', priority: 1},
+    {url: '/bitcoin-mejores-precios', changefreq: 'daily', priority: 0.9},
+    {url: '/bitcoin-calculadora', changefreq: 'daily', priority: 0.9},
+    {url: '/contacto', changefreq: 'monthly', priority: 0.7},
   ]
 });
 
@@ -43,7 +46,7 @@ app.get('/sitemap.xml', function(req, res) {
       return res.status(500).end();
     }
     res.header('Content-Type', 'application/xml');
-    res.send( xml );
+    res.send(xml);
   });
 });
 
