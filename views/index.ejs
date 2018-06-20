@@ -196,9 +196,15 @@
               </label>
             </div>
             <div class="four columns">
-              <label class="mercadopago">
+              <label class="transferencia">
                 <input type="radio" ng-model="radioModoVenta" value="pesos" ng-change="radioVenderChange()">
                 <span class="label-body">Depósito</span>
+              </label>
+            </div>
+            <div class="four columns">
+              <label class="mercadopago">
+                <input type="radio" ng-model="radioModoVenta" value="mercadopago" ng-change="radioVenderChange()">
+                <span class="label-body">Mercadopago</span>
               </label>
             </div>
           </div>
@@ -218,7 +224,7 @@
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="five columns right">{{ value.name }}</div>
               <div class="four columns left">{{ value.sell | currency }}</div>
-              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.compra | currency:"":2 }}%</div>
+              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.venta | currency:"":2 }}%</div>
             </div>
           </div>
         </div>

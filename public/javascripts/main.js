@@ -11,21 +11,51 @@ angular.module('preciobtc.controllers', [])
     	$scope.selectedMonto = null;
     	$scope.transShow = false;
 
-    	$scope.monedas = [{name: "BTC"}, {name: "ARS"}];
-    	$scope.operaciones = [{name: "Compra"}, {name: "Venta"}];
+    	$scope.monedas = [
+    		{name: "BTC"},
+    		{name: "ARS"}
+    	];
+    	$scope.operaciones = [
+    		{name: "Compra"},
+    		{name: "Venta"}
+    	];
 
-    	$scope.buyASC = _.filter(arrs[0], function(o) { return o.buy != 0 });
-    	$scope.sellDESC = _.filter(arrs[1], function(o) { return o.sell != 0 });
+    	$scope.buyASC = _.filter(arrs[0], function(o) {
+    		return o.buy != 0
+    	});
+    	$scope.sellDESC = _.filter(arrs[1], function(o) {
+    		return o.sell != 0
+    	});
 
-    	$scope.onlyTransferencia = _.filter($scope.buyASC, function(o) { return o.cargar.hasOwnProperty("transferencia") });
+    	$scope.onlyTransferencia = _.filter($scope.buyASC, function(o) {
+    		return o.cargar.transferencia !== undefined;
+    	});
     	$scope.bestTransferencia = tableSort(addFee("Transferencia", $scope.onlyTransferencia), "asc");
-    	$scope.onlyMercadopago = _.filter($scope.buyASC, function(o) { return o.cargar.hasOwnProperty("mercadopago") });
+
+    	$scope.onlyMercadopago = _.filter($scope.buyASC, function(o) {
+    		return o.cargar.mercadopago !== undefined;
+    	});
     	$scope.bestMercadopago = tableSort(addFee("Mercadopago", $scope.onlyMercadopago), "asc");
-    	$scope.onlyeRapipago = _.filter($scope.buyASC, function(o) { return o.cargar.hasOwnProperty("rapipago_pagofacil") });
+
+    	$scope.onlyeRapipago = _.filter($scope.buyASC, function(o) {
+    		return o.cargar.rapipago_pagofacil !== undefined;
+    	});
     	$scope.bestRapipago = tableSort(addFee("Rapipago/Pagofacil", $scope.onlyeRapipago), "asc");
 
-    	$scope.bestWallet = tableSort(addFee("Wallet", $scope.sellDESC), "desc");
-    	$scope.bestDeposito = tableSort(addFee("Deposito", $scope.sellDESC), "desc");
+    	$scope.onlyWallet = _.filter($scope.sellDESC, function(o) {
+    		return o.vender !== undefined && o.vender > 0;
+    	});
+    	$scope.bestWallet = tableSort(addFee("Wallet", $scope.onlyWallet), "desc");
+
+    	$scope.onlyDeposito = _.filter($scope.sellDESC, function(o) {
+    		return o.retirar !== undefined && o.retirar.transferencia !== undefined;
+    	});
+    	$scope.bestDeposito = tableSort(addFee("Deposito", $scope.onlyDeposito), "desc");
+
+    	$scope.onlySellMercadopago = _.filter($scope.sellDESC, function(o) {
+    		return o.retirar !== undefined && o.retirar.mercadopago !== undefined;
+    	});
+    	$scope.bestSellMercadopago = tableSort(addFee("sellMercadopago", $scope.onlySellMercadopago), "desc");
 
     	$scope.radioModoCompra = "transferencia";
     	$scope.tableBuy = addFee("Transferencia", $scope.buyASC);
@@ -45,20 +75,20 @@ angular.module('preciobtc.controllers', [])
 
     mySocket.on('bitfinex', function (ev, data) {
     	$scope.bitfinex = ev;
-      precioMercados['bitfinex'] = ev.last_price;
-    	if (!_.find($scope.mercados, function(o) { return o.name == "Bitfinex" })) {
-    		$scope.mercados.push({name: 'Bitfinex'});
-    		$scope.selectedMercadoCompra = $scope.selectedMercadoVenta = $scope.mercados[0];
-    	}
+		precioMercados['bitfinex'] = ev.last_price;
+		if (!_.find($scope.mercados, function(o) { return o.name == "Bitfinex" })) {
+			$scope.mercados.push({name: 'Bitfinex'});
+			$scope.selectedMercadoCompra = $scope.selectedMercadoVenta = $scope.mercados[0];
+		}
     });
 
     mySocket.on('bitstamp', function (ev, data) {
-    	$scope.bitstamp = ev;
-      precioMercados['bitstamp'] = ev.last;
-    	if (!_.find($scope.mercados, function(o) { return o.name == "Bitstamp" })) {
-	    	$scope.mercados.push({name: 'Bitstamp'});
-	    	$scope.selectedMercadoCompra = $scope.selectedMercadoVenta = $scope.mercados[0];
-    	}
+		$scope.bitstamp = ev;
+		precioMercados['bitstamp'] = ev.last;
+		if (!_.find($scope.mercados, function(o) { return o.name == "Bitstamp" })) {
+			$scope.mercados.push({name: 'Bitstamp'});
+			$scope.selectedMercadoCompra = $scope.selectedMercadoVenta = $scope.mercados[0];
+		}
     });
 
 	$scope.buttonaAction = function() {
@@ -129,9 +159,11 @@ angular.module('preciobtc.controllers', [])
 	    var card = angular.element(document.getElementById('card'));
 	    $document.scrollToElementAnimated(card);
 	}
+
 	$scope.inputChange = function() {
 		$scope.transShow = false;
 	}
+
 	$scope.operacionChange = function() {
 		$scope.transShow = false;
 		$scope.selectedSitio = null;
@@ -140,9 +172,10 @@ angular.module('preciobtc.controllers', [])
 			$scope.modos = [{name: "Transferencia"}, {name: "Mercadopago"}, {name: "Rapipago/Pagofacil"}]
 		}
 		else if ($scope.selectedOperacion.name == "Venta") {
-			$scope.modos = [{name: "Wallet"}, {name: "Deposito"}]
+			$scope.modos = [{name: "Wallet"}, {name: "Deposito"}, {name: "Mercadopago"}]
 		}
 	}
+
 	$scope.modosChange = function() {
 		if (!$scope.selectedModo) {
 			return
@@ -150,42 +183,44 @@ angular.module('preciobtc.controllers', [])
 		if ($scope.selectedModo.name == "Transferencia") {
 			$scope.sitios = $scope.onlyTransferencia;
 			$scope.radioModoCompra = "transferencia";
-			$scope.tableBuy = $scope.bestTransferencia
+			$scope.tableBuy = $scope.bestTransferencia;
 		}
-		else if ($scope.selectedModo.name == "Mercadopago") {
+		else if ($scope.selectedModo.name == "Mercadopago" && $scope.selectedOperacion.name == "Compra") {
 			$scope.sitios = $scope.onlyMercadopago;
 			$scope.radioModoCompra = "mercadopago";
-			$scope.tableBuy = $scope.bestMercadopago
+			$scope.tableBuy = $scope.bestMercadopago;
 		}
 		else if ($scope.selectedModo.name == "Rapipago/Pagofacil") {
 			$scope.sitios = $scope.onlyeRapipago;
 			$scope.radioModoCompra = "rapipago";
-			$scope.tableBuy = $scope.bestRapipago
+			$scope.tableBuy = $scope.bestRapipago;
 		}
 		else if ($scope.selectedModo.name == "Wallet") {
 			$scope.sitios = _.filter($scope.buyASC, function(o) {
-				if (!o.hasOwnProperty("vender")) {
-					return false
-				}
-				return o.vender.hasOwnProperty("billetera")
+				return o.vender !== undefined && o.vender > 0;
 			});
 			$scope.radioModoVenta = "billetera";
-			$scope.tableSell = $scope.bestWallet
+			$scope.tableSell = $scope.bestWallet;
 		}
 		else if ($scope.selectedModo.name == "Deposito") {
 			$scope.sitios = _.filter($scope.buyASC, function(o) {
-				if (!o.hasOwnProperty("vender")) {
-					return false
-				}
-				return o.vender.hasOwnProperty("pesos")
+				return o.retirar !== undefined && o.retirar.transferencia !== undefined;
 			});
 			$scope.radioModoVenta = "pesos";
-			$scope.tableSell = $scope.bestDeposito
+			$scope.tableSell = $scope.bestDeposito;
+		}
+		else if ($scope.selectedModo.name == "Mercadopago" && $scope.selectedOperacion.name == "Venta") {
+			$scope.sitios = _.filter($scope.buyASC, function(o) {
+				return o.retirar !== undefined && o.retirar.mercadopago !== undefined;
+			});
+			$scope.radioModoVenta = "mercadopago";
+			$scope.tableSell = $scope.bestSellMercadopago;
 		}
 
 		$scope.transShow = false;
 		$scope.selectedMonto = null;
 	}
+
 	$scope.radioCompraChange = function() {
 		if ($scope.radioModoCompra == "transferencia") {
 			$scope.tableBuy = $scope.bestTransferencia
@@ -197,6 +232,7 @@ angular.module('preciobtc.controllers', [])
 			$scope.tableBuy = $scope.bestRapipago
 		}
 	}
+
 	$scope.radioVenderChange = function() {
 		if ($scope.radioModoVenta == "billetera") {
 			$scope.tableSell = $scope.bestWallet
@@ -204,7 +240,11 @@ angular.module('preciobtc.controllers', [])
 		else if ($scope.radioModoVenta == "pesos") {
 			$scope.tableSell = $scope.bestDeposito
 		}
+		else if ($scope.radioModoVenta == "mercadopago") {
+			$scope.tableSell = $scope.bestSellMercadopago
+		}
 	}
+
 	$scope.filterCompra = function(element) {
 		if ($scope.radioModoCompra == "transferencia") {
 			return element.cargar.hasOwnProperty("transferencia") ? true : false
@@ -216,12 +256,16 @@ angular.module('preciobtc.controllers', [])
 			return element.cargar.hasOwnProperty("rapipago_pagofacil") ? true : false
 		}
 	}
+
 	$scope.filterVenta = function(element) {
 		if ($scope.radioModoVenta == "billetera") {
-			return element.vender.hasOwnProperty("billetera") ? true : false
+			return element.vender !== undefined && element.vender > 0;
 		}
 		else if ($scope.radioModoVenta == "pesos") {
-			return element.vender.hasOwnProperty("pesos") ? true : false
+			return element.retirar !== undefined && element.retirar.transferencia !== undefined;
+		}
+		else if ($scope.radioModoVenta == "mercadopago") {
+			return element.retirar !== undefined && element.retirar.mercadopago !== undefined;
 		}
 	}
 });
@@ -256,6 +300,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["ArgenBTC"].cargar,
 			comprar: json["ArgenBTC"].comprar,
 			vender: json["ArgenBTC"].vender,
+			retirar: json["ArgenBTC"].retirar,
 			type: json["ArgenBTC"].type
 		})
 		arr.push({
@@ -266,6 +311,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["Bitinka"].cargar,
 			comprar: json["Bitinka"].comprar,
 			vender: json["Bitinka"].vender,
+			retirar: json["Bitinka"].retirar,
 			type: json["Bitinka"].type
 		})
 		arr.push({
@@ -276,6 +322,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["Buda"].cargar,
 			comprar: json["Buda"].comprar,
 			vender: json["Buda"].vender,
+			retirar: json["Buda"].retirar,
 			type: json["Buda"].type
 		})
 		arr.push({
@@ -286,6 +333,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["BuenBit"].cargar,
 			comprar: json["BuenBit"].comprar,
 			vender: json["BuenBit"].vender,
+			retirar: json["BuenBit"].retirar,
 			type: json["BuenBit"].type
 		})
 		/*arr.push({
@@ -296,6 +344,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["CoinASAP"].cargar,
 			comprar: json["CoinASAP"].comprar,
 			vender: json["CoinASAP"].vender,
+			retirar: json["CoinASAP"].retirar,
 			type: json["CoinASAP"].type
 		})*/
 		arr.push({
@@ -306,6 +355,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["CryptoMKT"].cargar,
 			comprar: json["CryptoMKT"].comprar,
 			vender: json["CryptoMKT"].vender,
+			retirar: json["CryptoMKT"].retirar,
 			type: json["CryptoMKT"].type
 		})
 		arr.push({
@@ -316,6 +366,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["Ripio"].cargar,
 			comprar: json["Ripio"].comprar,
 			vender: json["Ripio"].vender,
+			retirar: json["Ripio"].retirar,
 			type: json["Ripio"].type
 		})
 		arr.push({
@@ -326,6 +377,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["Saldo"].cargar,
 			comprar: json["Saldo"].comprar,
 			vender: json["Saldo"].vender,
+			retirar: json["Saldo"].retirar,
 			type: json["Saldo"].type
 		})
 		arr.push({
@@ -336,6 +388,7 @@ angular.module('preciobtc.services', [])
 			cargar: json["SatoshiTango"].cargar,
 			comprar: json["SatoshiTango"].comprar,
 			vender: json["SatoshiTango"].vender,
+			retirar: json["SatoshiTango"].retirar,
 			type: json["SatoshiTango"].type
 		})
 		arr.push({
@@ -345,6 +398,7 @@ angular.module('preciobtc.services', [])
 			timestamp: json["VentaBTC"].timestamp,
 			cargar: json["VentaBTC"].cargar,
 			comprar: json["VentaBTC"].comprar,
+			retirar: json["VentaBTC"].retirar,
 			type: json["VentaBTC"].type
 		})
 		var buyASC = arr.slice(0);
@@ -364,7 +418,7 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				_sitio.buy = _sitio.buy - (_sitio.buy * _sitio.cargar.transferencia) - (_sitio.buy * _sitio.comprar)
+				_sitio.buy = ((_sitio.buy * (1 + _sitio.cargar.transferencia)) * (1 + _sitio.comprar))
 				newSitios.push(_sitio)
 			})
 		}
@@ -372,7 +426,7 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				_sitio.buy = _sitio.buy - (_sitio.buy * _sitio.cargar.mercadopago) - (_sitio.buy * _sitio.comprar)
+				_sitio.buy = _sitio.buy = ((_sitio.buy * (1 + _sitio.cargar.mercadopago)) * (1 + _sitio.comprar))
 				newSitios.push(_sitio)
 			})
 		}
@@ -380,7 +434,7 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				_sitio.buy = _sitio.buy - (_sitio.buy * _sitio.cargar.rapipago_pagofacil) - (_sitio.buy * _sitio.comprar)
+				_sitio.buy = _sitio.buy = ((_sitio.buy * (1 + _sitio.cargar.rapipago_pagofacil)) * (1 + _sitio.comprar))
 				newSitios.push(_sitio)
 			})
 		}
@@ -388,8 +442,8 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				if (_sitio.hasOwnProperty("vender")) {
-					_sitio.sell = _sitio.sell - (_sitio.sell * _sitio.vender.billetera)
+				if (_sitio.vender !== undefined) {
+					_sitio.sell = _sitio.sell * (1 - _sitio.vender)
 					newSitios.push(_sitio)
 				}
 			})
@@ -398,8 +452,18 @@ angular.module('preciobtc.services', [])
 			var newSitios = [];
 			(sitios).forEach(function(sitio){
 				var _sitio = _.clone(sitio, true);
-				if (_sitio.hasOwnProperty("vender")) {
-					_sitio.sell = _sitio.sell - (_sitio.sell * _sitio.vender.pesos)
+				if (_sitio.retirar !== undefined && _sitio.retirar.transferencia !== undefined) {
+					_sitio.sell = _sitio.sell * (1 - _sitio.retirar.transferencia)
+					newSitios.push(_sitio)
+				}
+			})
+		}
+		else if (modo == "sellMercadopago") {
+			var newSitios = [];
+			(sitios).forEach(function(sitio){
+				var _sitio = _.clone(sitio, true);
+				if (_sitio.retirar !== undefined && _sitio.retirar.mercadopago !== undefined) {
+					_sitio.sell = _sitio.sell * (1 - _sitio.retirar.mercadopago)
 					newSitios.push(_sitio)
 				}
 			})
@@ -410,7 +474,8 @@ angular.module('preciobtc.services', [])
 .filter('mercado', function() {
 	return function(input, mercado, dolar) {
     if (mercado && dolar) {
-      return (((parseFloat(dolar) * parseFloat(precioMercados[ (mercado.name).toLowerCase() ])) / parseFloat(input)) - 1) * -100
+    	var _mercado = parseFloat(precioMercados[(mercado.name).toLowerCase()])
+		return ((input / (_mercado * dolar)) - 1) * 100
     }
     return "?"
 	};
@@ -440,9 +505,8 @@ angular.module('preciobtc.services', [])
 		replace: true,   
 		scope: {},
 		templateUrl: '../views/pie.html',
-		link: function ($scope, element, attrs) {
-		}
-  }
+		link: function ($scope, element, attrs) {}
+	}
 })
 
 angular.module('preciobtc', [
