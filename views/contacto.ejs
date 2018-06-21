@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="preciobtc">
   <head>
-    <title>Descubri el precio de BTC mas conveniente</title>
+    <title>Contactate con PrecioBTC</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Calcula como comprar y vender bitcoin al mejor precio con comisiones incluidad">
-    <meta name="keywords" content="Comision, Comisiones, Fee, Transferencia, Bancaria, Efectivo, Calculadora, Criptomonedas">
+    <meta name="description" content="Contacto con el equipo de Precio BTC">
+    <meta name="keywords" content="Contacto, Equipo, Consultas, Preguntas, Bitcoin">
     <meta name="author" content="PrecioBTC">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -39,16 +39,16 @@
     <!--meta property="og:image" content="https://www.preciobtc.com/images/promo/share.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="627" /-->
-    <meta property="og:title" content="Descubri el precio de BTC mas conveniente" />
-    <meta property="og:description" content="Calcula como comprar y vender bitcoin al mejor precio con comisiones incluidad" />
-    <meta property="og:url" content="https://www.preciobtc.com/bitcoin-calculadora" />
+    <meta property="og:title" content="Contactate con PrecioBTC" />
+    <meta property="og:description" content="Contacto con el equipo de Precio BTC" />
+    <meta property="og:url" content="https://www.preciobtc.com/contacto" />
     <meta property="og:type" content="website" />
     <!--link href="https://www.preciobtc.com/images/promo/share.png" rel="image_src" /-->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@preciobtc">
     <meta name="twitter:creator" content="@preciobtc">
-    <meta name="twitter:title" content="Descubri el precio de BTC mas conveniente">
-    <meta name="twitter:description" content="Calcula como comprar y vender bitcoin al mejor precio con comisiones incluidad">
+    <meta name="twitter:title" content="Contactate con PrecioBTC">
+    <meta name="twitter:description" content="Contacto con el equipo de Precio BTC">
     <!--meta name="twitter:image" content="https://www.preciobtc.com/images/promo/share.png"-->
 
     <script type="text/javascript">
@@ -59,7 +59,7 @@
     </script>
 
   </head>
-  <body ng-controller="mainController" ng-cloak style="background-color: #7051BE;">
+  <body ng-controller="mainController" ng-cloak>
 
     <div menu active='home'></div>
 
@@ -86,59 +86,32 @@
       </div>
     </div>
 
-    <div class="container one">
-      <div class="row trans">
-        <h2>Calculá el valor de tu operación de Bitcoins</h2>
-        <p>Compara y elige tu Mejor Opción</p>
-      </div>
-      <form name="calcForm">
-        <div class="row form">
-          <div class="two columns">
-            <label for="operacion">Operación</label>
-            <select class="u-full-width" id="operacion" ng-options="operacion.name for operacion in operaciones" ng-model="selectedOperacion" ng-change="operacionChange()">
+    <div class="container two" style="padding-top: 40px;">
+      <pre id="msjBox"><code></code></pre>
+      <h4 style="margin-bottom: 20px;">Formulario de contacto</h4>
+      <form name="contacto" method="post" action="/contacto">
+        <div class="row">
+          <div class="six columns" style="margin-top: 20px;">
+            <label for="exampleEmailInput">Tu e-mail</label>
+            <input name="email" class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput" required>
+          </div>
+          <div class="six columns" style="margin-top: 20px;">
+            <label for="exampleRecipientInput">Razón del contacto</label>
+            <select class="u-full-width" id="exampleRecipientInput" name="razon" required>
+              <option value="Agregar cotizacion">Agregar cotización</option>
+              <option value="Problema con cotizacion">Problema con cotización</option>
+              <option value="Problema con calculadora">Problema con calculadora</option>
+              <option value="Prensa">Prensa</option>
+              <option value="Contacto general">Contacto general</option>
+              <option value="Recomendaciones">Recomendaciones</option>
+              <option value="Alagos">Alagos :)</option>
             </select>
-          </div>
-          <div class="two columns">
-            <label for="modo">Modo <span style="font-size: 12px"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>
-            <select class="u-full-width" id="modo" ng-options="modo.name for modo in modos" ng-model="selectedModo" ng-change="modosChange()">
-            </select>
-          </div>
-          <div class="two columns">
-            <label for="sitio">Plataforma</label>
-            <select class="u-full-width" id="sitio" ng-options="sitio.name for sitio in sitios" ng-model="selectedSitio" ng-change="inputChange()">
-            </select>
-          </div>
-          <div class="two columns">
-            <div class="row">
-              <div class="ten columns inputMonto">
-                <label for="monto">Monto</label>
-                <input class="u-full-width" type="text" placeholder="" id="monto" name="monto" ng-pattern="/^[0-9\.]*$/" required ng-model="selectedMonto" ng-change="inputChange()">
-              </div>
-              <div class="two columns iconMonto">
-                <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
-                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="four columns">
-            <button class="button button-primary u-full-width" ng-click="buttonaAction()" ng-disabled="transShow || calcForm.monto.$error.pattern">Calcular</button>
           </div>
         </div>
+        <label for="exampleMessage" style="margin-top: 20px;">Mensaje</label>
+        <textarea class="u-full-width" placeholder="Querido equipo..." id="exampleMessage" name="mensaje" style="height: 101px" required></textarea>
+        <input class="button-primary u-full-width send" type="submit" value="Enviar">
       </form>
-      <div id="card"></div>
-      <div class="row animate-if" ng-if="transShow">
-        <div class="transCard">
-            <i class="btc-icon fab fa-bitcoin"></i>
-            <div class="header">
-              <h5>{{ selectedSitio.name }} <span style="font-size: 14px"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
-            </div>
-            <ul>
-              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>
-              <li ng-show="selectedOperacion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"$":2 }}</strong></li>
-            </ul>
-        </div>
-        <p class="msg"><i class="fas fa-bullhorn"></i> {{ transMsg }}</p>
-      </div>
     </div>
 
     <div pie></div>
@@ -166,5 +139,21 @@
     <script src="/angular-socket-io/socket.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
     <script src="/javascripts/main.js"></script>
+    <script type="text/javascript">
+      var url = new URL(window.location.href);
+      var c = url.searchParams.get("success");
+      var box = document.getElementById('msjBox');
+      if (c !== null) {
+        box.style.display = "block";
+        if (c == "true") {
+          box.innerHTML = "<code>El mensaje se envió correctamente! En breve el equipo de PrecioBTC.com se pondrá en contacto contigo.</code>";
+        } else {
+          box.innerHTML = "<code>Algo salió mal y el mensaje no se envió. Por favor intenta de nuevo.</code>";
+        }
+      } else {
+        box.style.display = "none";
+      }
+    </script>
+
   </body>
 </html>

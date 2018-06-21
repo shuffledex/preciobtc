@@ -20,6 +20,12 @@ select {
   border-radius: 8px; }
 form {
   margin: 0; }
+.home {
+  margin: 5px 0 0 14px; 
+  padding: 0 !important; }
+.logo {
+  width: 40px;
+  height: 40px; }
 .topnav {
   padding: 4px 6px;
   overflow: hidden;
@@ -323,6 +329,20 @@ span.question {
   letter-spacing: 1px;
   top: -1px;
   position: relative; }
+.container.two .send,
+.container.two .send:hover,
+.container.two .send:link,
+.container.two .send:active,
+.container.two .send:visited {
+  height: 48px; 
+  line-height: 47px; 
+  margin-top: 29px; 
+  margin-bottom: 0; 
+  background: transparent;
+  color: #7051BE;
+  border: 2px solid #7051BE;
+  border-radius: 12px;
+  opacity: 1; }
 .fa-circle {
   -webkit-animation-name: blinker;
   -webkit-animation-duration: 2s;
@@ -382,6 +402,8 @@ footer .copyright {
   text-align: center; }
 footer .secciones li {
   text-align: center; }
+pre code {
+ font-family:'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 @-moz-keyframes blinker {
   0% {
     opacity: 1.0;
