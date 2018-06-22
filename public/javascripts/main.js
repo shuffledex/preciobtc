@@ -221,7 +221,7 @@ angular.module('preciobtc.controllers', [])
 		$scope.selectedMonto = null;
 	}
 
-	$scope.radioCompraChange = function() {
+	/*$scope.radioCompraChange = function() {
 		if ($scope.radioModoCompra == "transferencia") {
 			$scope.tableBuy = $scope.bestTransferencia
 		}
@@ -243,7 +243,7 @@ angular.module('preciobtc.controllers', [])
 		else if ($scope.radioModoVenta == "mercadopago") {
 			$scope.tableSell = $scope.bestSellMercadopago
 		}
-	}
+	}*/
 
 	$scope.filterCompra = function(element) {
 		if ($scope.radioModoCompra == "transferencia") {

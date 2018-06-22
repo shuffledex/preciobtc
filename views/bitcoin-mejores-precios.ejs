@@ -102,9 +102,14 @@
       </div>
       <div class="row">
         <div class="six columns">
-          <h4>Comprar 1 BTC te saldrá...</h4>
+          <h4>Comprar 1 BTC</h4>
+          <div class="modos">
+            <button ng-click="radioModoCompra = 'transferencia'" ng-class="{active: radioModoCompra === 'transferencia'}">Transf. Bancaria</button>
+            <button ng-click="radioModoCompra = 'mercadopago'" ng-class="{active: radioModoCompra === 'mercadopago'}">Mercadopago</button>
+            <button ng-click="radioModoCompra = 'rapipago'" ng-class="{active: radioModoCompra === 'rapipago'}">Rapipago/Pagofacil</button>
+          </div>
 
-          <div class="row medios">
+          <!--div class="row medios">
             <h5>Modo de compra <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para cargar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
             <div class="four columns" style="margin-left: 0;">
               <label class="transferencia">
@@ -124,13 +129,13 @@
                 <span class="label-body">Rapi/Pago facil</span>
               </label>
             </div>
-          </div>
+          </div-->
 
           <div class="row">
-            <div class="six columns">
-              <p class="ordenado">Ordenado por mejor precio de compra</p>
+            <div class="nine columns">
+              <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
             </div>
-            <div class="six columns" style="text-align: right">
+            <div class="three columns" style="text-align: right">
               <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoCompra" ng-change="mercadosChange()">
               </select>
             </div>
@@ -146,9 +151,14 @@
           </div>
         </div>
         <div class="six columns tablaVenta">
-          <h4>Vendiendo 1 BTC te darán...</h4>
+          <h4>Vender 1 BTC</h4>
+          <div class="modos">
+            <button ng-click="radioModoVenta = 'billetera'" ng-class="{active: radioModoVenta === 'billetera'}">Wallet</button>
+            <button ng-click="radioModoVenta = 'pesos'" ng-class="{active: radioModoVenta === 'pesos'}">Depósito bancario</button>
+            <button ng-click="radioModoVenta = 'mercadopago'" ng-class="{active: radioModoVenta === 'mercadopago'}">Mercadopago</button>
+          </div>
 
-          <div class="row medios">
+          <!--div class="row medios">
             <h5>Modo de venta <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para retirar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
             <div class="four columns" style="margin-left: 0;">
               <label class="transferencia">
@@ -157,18 +167,24 @@
               </label>
             </div>
             <div class="four columns">
-              <label class="mercadopago">
+              <label class="transferencia">
                 <input type="radio" ng-model="radioModoVenta" value="pesos" ng-change="radioVenderChange()">
                 <span class="label-body">Depósito</span>
               </label>
             </div>
-          </div>
+            <div class="four columns">
+              <label class="mercadopago">
+                <input type="radio" ng-model="radioModoVenta" value="mercadopago" ng-change="radioVenderChange()">
+                <span class="label-body">Mercadopago</span>
+              </label>
+            </div>
+          </div-->
 
           <div class="row">
-            <div class="six columns">
-              <p class="ordenado">Ordenado por mejor precio de venta</p>
+            <div class="nine columns">
+              <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
             </div>
-            <div class="six columns" style="text-align: right">
+            <div class="three columns" style="text-align: right">
               <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoVenta" ng-change="mercadosChange()">
               </select>
             </div>
@@ -179,7 +195,7 @@
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
               <div class="five columns right">{{ value.name }}</div>
               <div class="four columns left">{{ value.sell | currency }}</div>
-              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.compra | currency:"":2 }}%</div>
+              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.venta | currency:"":2 }}%</div>
             </div>
           </div>
         </div>
