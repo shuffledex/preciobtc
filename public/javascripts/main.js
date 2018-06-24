@@ -221,7 +221,8 @@ angular.module('preciobtc.controllers', [])
 		$scope.selectedMonto = null;
 	}
 
-	/*$scope.radioCompraChange = function() {
+	$scope.radioCompraChange = function(mode) {
+		$scope.radioModoCompra = mode;
 		if ($scope.radioModoCompra == "transferencia") {
 			$scope.tableBuy = $scope.bestTransferencia
 		}
@@ -233,7 +234,8 @@ angular.module('preciobtc.controllers', [])
 		}
 	}
 
-	$scope.radioVenderChange = function() {
+	$scope.radioVenderChange = function(mode) {
+		$scope.radioModoVenta = mode;
 		if ($scope.radioModoVenta == "billetera") {
 			$scope.tableSell = $scope.bestWallet
 		}
@@ -243,7 +245,7 @@ angular.module('preciobtc.controllers', [])
 		else if ($scope.radioModoVenta == "mercadopago") {
 			$scope.tableSell = $scope.bestSellMercadopago
 		}
-	}*/
+	}
 
 	$scope.filterCompra = function(element) {
 		if ($scope.radioModoCompra == "transferencia") {

@@ -105,9 +105,9 @@
         <div class="six columns">
           <h4>Comprar 1 BTC</h4>
           <div class="modos">
-            <button ng-click="radioModoCompra = 'transferencia'" ng-class="{active: radioModoCompra === 'transferencia'}">Transf. Bancaria</button>
-            <button ng-click="radioModoCompra = 'mercadopago'" ng-class="{active: radioModoCompra === 'mercadopago'}">Mercadopago</button>
-            <button ng-click="radioModoCompra = 'rapipago'" ng-class="{active: radioModoCompra === 'rapipago'}">Rapipago/Pagofacil</button>
+            <button ng-click="radioCompraChange('transferencia')" ng-class="{active: radioModoCompra === 'transferencia'}">Transf. Bancaria</button>
+            <button ng-click="radioCompraChange('mercadopago')" ng-class="{active: radioModoCompra === 'mercadopago'}">Mercadopago</button>
+            <button ng-click="radioCompraChange('rapipago')" ng-class="{active: radioModoCompra === 'rapipago'}">Rapipago/Pagofacil</button>
           </div>
 
           <!--div class="row medios">
@@ -154,9 +154,9 @@
         <div class="six columns tablaVenta">
           <h4>Vender 1 BTC</h4>
           <div class="modos">
-            <button ng-click="radioModoVenta = 'billetera'" ng-class="{active: radioModoVenta === 'billetera'}">Wallet</button>
-            <button ng-click="radioModoVenta = 'pesos'" ng-class="{active: radioModoVenta === 'pesos'}">Depósito bancario</button>
-            <button ng-click="radioModoVenta = 'mercadopago'" ng-class="{active: radioModoVenta === 'mercadopago'}">Mercadopago</button>
+            <button ng-click="radioVenderChange('billetera')" ng-class="{active: radioModoVenta === 'billetera'}">Wallet</button>
+            <button ng-click="radioVenderChange('pesos')" ng-class="{active: radioModoVenta === 'pesos'}">Depósito bancario</button>
+            <button ng-click="radioVenderChange('mercadopago')" ng-class="{active: radioModoVenta === 'mercadopago'}">Mercadopago</button>
           </div>
 
           <!--div class="row medios">
