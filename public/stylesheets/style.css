@@ -20,12 +20,19 @@ select {
   border-radius: 8px; }
 form {
   margin: 0; }
+.container {
+  max-width: 100%; }
 .home {
   margin: 5px 0 0 14px; 
   padding: 0 !important; }
 .logo {
   width: 40px;
-  height: 40px; }
+  height: 40px;
+  float: left; }
+.topnav span {
+  float: left;
+  margin-top: 10px;
+  margin-left: 10px; }
 .topnav {
   padding: 4px 6px;
   overflow: hidden;
