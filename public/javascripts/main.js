@@ -361,6 +361,17 @@ angular.module('preciobtc.services', [])
 			type: json["CryptoMKT"].type
 		})
 		arr.push({
+			name: "Qubit",
+			buy: json["Qubit"].buy,
+			sell: json["Qubit"].sell,
+			timestamp: json["Qubit"].timestamp,
+			cargar: json["Qubit"].cargar,
+			comprar: json["Qubit"].comprar,
+			vender: json["Qubit"].vender,
+			retirar: json["Qubit"].retirar,
+			type: json["Qubit"].type
+		})
+		arr.push({
 			name: "Ripio",
 			buy: json["Ripio"].buy,
 			sell: json["Ripio"].sell,
