@@ -11,13 +11,15 @@ var app = express();
 app.io = require('socket.io')();
 
 var sitemap = sm.createSitemap ({
-  hostname: 'https://www.preciobtc.com',
   cacheTime: 600000,
   urls: [
-    {url: '/', changefreq: 'daily', priority: 1},
-    {url: '/bitcoin-mejores-precios', changefreq: 'daily', priority: 0.9},
-    {url: '/bitcoin-calculadora', changefreq: 'daily', priority: 0.9},
-    {url: '/contacto', changefreq: 'monthly', priority: 0.7},
+    {url: 'https://www.preciobtc.com/', changefreq: 'daily', priority: 1},
+    {url: 'https://www.preciobtc.com/bitcoin-mejores-precios', changefreq: 'daily', priority: 0.9},
+    {url: 'https://www.preciobtc.com/bitcoin-calculadora', changefreq: 'daily', priority: 0.9},
+    {url: 'https://www.preciobtc.com/contacto', changefreq: 'monthly', priority: 0.7},
+    {url: 'https://www.preciobtc.com/cl', changefreq: 'daily', priority: 1},
+    {url: 'https://www.preciobtc.com/cl/bitcoin-mejores-precios', changefreq: 'daily', priority: 0.9},
+    {url: 'https://www.preciobtc.com/cl/bitcoin-calculadora', changefreq: 'daily', priority: 0.9}
   ]
 });
 

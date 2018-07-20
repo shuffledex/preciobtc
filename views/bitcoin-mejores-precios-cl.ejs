@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="preciobtc">
   <head>
-    <title>Mejores precios de compra y venta de Bitcoin en Argentina</title>
+    <title>Mejores precios de compra y venta de Bitcoin en Chile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description" content="Compara de forma fácil donde comprar y vender bitcoin al mejor precio">
-    <meta name="keywords" content="Operacion, Calculadora, Transferencia, Mercadopago, Pagofacil, Rapipago, Efectivo, Pesos, Dolar, Bitcoin">
+    <meta name="keywords" content="Operacion, Calculadora, Transferencia, Pesos, Dolar, Bitcoin, Chile">
     <meta name="author" content="PrecioBTC">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -39,15 +39,15 @@
     <meta property="og:image" content="https://www.preciobtc.com/images/promos/tabla.png" />
     <meta property="og:image:width" content="800" />
     <meta property="og:image:height" content="600" />
-    <meta property="og:title" content="Mejores precios de compra y venta de Bitcoin en Argentina" />
+    <meta property="og:title" content="Mejores precios de compra y venta de Bitcoin en Chile" />
     <meta property="og:description" content="Compara de forma facil donde comprar y vender bitcoin al mejor precio" />
-    <meta property="og:url" content="https://www.preciobtc.com/bitcoin-mejores-precios" />
+    <meta property="og:url" content="https://www.preciobtc.com/cl/bitcoin-mejores-precios" />
     <meta property="og:type" content="website" />
     <link href="https://www.preciobtc.com/images/promos/tabla.png" rel="image_src" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@PrecioBTC_com">
     <meta name="twitter:creator" content="@PrecioBTC_com">
-    <meta name="twitter:title" content="Mejores precios de compra y venta de Bitcoin en Argentina">
+    <meta name="twitter:title" content="Mejores precios de compra y venta de Bitcoin en Chile">
     <meta name="twitter:description" content="Compara de forma facil donde comprar y vender bitcoin al mejor precio">
     <meta name="twitter:image" content="https://www.preciobtc.com/images/promos/tabla.png">
 
@@ -90,8 +90,6 @@
       <h5>Mejor precio de compra</h5>
       <ul>
         <li>Transferencia Bancaria <strong>{{bestTransferencia[0].name}}</strong> <span class="green">{{bestTransferencia[0].buy | currency:"$":2}}</span></li>
-        <li>Mercadopago <strong>{{bestMercadopago[0].name}}</strong> <span class="green">{{bestMercadopago[0].buy | currency:"$":2}}</span></li>
-        <li>Rapipago/Pagofacil <strong>{{bestRapipago[0].name}}</strong> <span class="green">{{bestRapipago[0].buy | currency:"$":2}}</span></li>
       </ul>
     </div>
 
@@ -105,8 +103,6 @@
           <h4>Comprar BTC</h4>
           <div class="modos">
             <button ng-click="radioCompraChange('transferencia')" ng-class="{active: radioModoCompra === 'transferencia'}">Transf. Bancaria</button>
-            <button ng-click="radioCompraChange('mercadopago')" ng-class="{active: radioModoCompra === 'mercadopago'}">Mercadopago</button>
-            <button ng-click="radioCompraChange('rapipago')" ng-class="{active: radioModoCompra === 'rapipago'}">Rapipago/Pagofacil</button>
           </div>
 
           <!--div class="row medios">
@@ -153,9 +149,7 @@
         <div class="six columns tablaVenta">
           <h4>Vender BTC</h4>
           <div class="modos">
-            <button ng-click="radioVenderChange('billetera')" ng-class="{active: radioModoVenta === 'billetera'}">Wallet</button>
             <button ng-click="radioVenderChange('pesos')" ng-class="{active: radioModoVenta === 'pesos'}">Depósito bancario</button>
-            <button ng-click="radioVenderChange('mercadopago')" ng-class="{active: radioModoVenta === 'mercadopago'}">Mercadopago</button>
           </div>
 
           <!--div class="row medios">
@@ -226,6 +220,6 @@
     <script src="/angular-scroll/angular-scroll.min.js"></script>
     <script src="/angular-socket-io/socket.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-    <script src="/javascripts/main.js"></script>
+    <script src="/javascripts/main-cl.js"></script>
   </body>
 </html>

@@ -12,8 +12,12 @@ admin.initializeApp({
 
 var db = admin.database();
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {  
   res.render('index', {});
+});
+
+router.get('/cl', function(req, res, next) {
+  res.render('index-cl', {});
 });
 
 router.get('/bitcoin-mejores-precios', function(req, res, next) {
@@ -22,6 +26,14 @@ router.get('/bitcoin-mejores-precios', function(req, res, next) {
 
 router.get('/bitcoin-calculadora', function(req, res, next) {
   res.render('bitcoin-calculadora', {});
+});
+
+router.get('/cl/bitcoin-mejores-precios', function(req, res, next) {
+  res.render('bitcoin-mejores-precios-cl', {});
+});
+
+router.get('/cl/bitcoin-calculadora', function(req, res, next) {
+  res.render('bitcoin-calculadora-cl', {});
 });
 
 router.get('/contacto', function(req, res, next) {
@@ -57,6 +69,10 @@ module.exports = function (io) {
   io.on('connection', function (socket) {
     var refSitios = db.ref("sitios/ARS");
     var refDolar = db.ref("dolar/ARS");
+
+    var refSitiosCl = db.ref("sitios/CL");
+    var refDolarCl = db.ref("dolar/CL");
+
     var refBitfinex = db.ref("bitfinex");
     var refBitstamp = db.ref("bitstamp");
 
@@ -68,6 +84,18 @@ module.exports = function (io) {
 
     refDolar.on("value", function(snapshot) {
       socket.emit('dolar', snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+
+    refSitiosCl.on("value", function(snapshot) {
+      socket.emit('pricesCl', snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+
+    refDolarCl.on("value", function(snapshot) {
+      socket.emit('dolarCl', snapshot.val());
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });

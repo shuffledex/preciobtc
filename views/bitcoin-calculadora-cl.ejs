@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="preciobtc">
   <head>
-    <title>Precio Bitcoin Argentina</title>
+    <title>Descubre el precio del Bitcoin más conveniente en Chile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="La mejor forma de ver cómo y dónde comprar Bitcoin en Argentina">
-    <meta name="keywords" content="Bitcoin, BTC, Comprar, Vender, Calculadora, Precio, Criptomoneda, Invertir, Argentina, Exchange">
+    <meta name="description" content="Calcula como comprar y vender bitcoin al mejor precio con comisiones incluidas">
+    <meta name="keywords" content="Comision, Fee, Transferencia, Bancaria, Calculadora, Criptomonedas, Chile">
     <meta name="author" content="PrecioBTC">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -35,22 +35,21 @@
 
     <meta name="theme-color" content="#7051BE">
     <meta name="msapplication-navbutton-color" content="#7051BE"/>
-    <meta name="google-site-verification" content="gyYZQ5y6qfetX-JuFZGGChwXppLTi1s98aXmooax6t4" />
 
-    <meta property="og:image" content="https://www.preciobtc.com/images/promos/home.png" />
+    <meta property="og:image" content="https://www.preciobtc.com/images/promos/calculadora.png" />
     <meta property="og:image:width" content="800" />
     <meta property="og:image:height" content="600" />
-    <meta property="og:title" content="Precio Bitcoin Argentina" />
-    <meta property="og:description" content="La mejor forma de ver cómo y dónde comprar Bitcoin en Argentina" />
-    <meta property="og:url" content="https://www.preciobtc.com/" />
+    <meta property="og:title" content="Descubre el precio del Bitcoin más conveniente en Chile" />
+    <meta property="og:description" content="Calcula cómo comprar y vender bitcoin al mejor precio con comisiones incluidas" />
+    <meta property="og:url" content="https://www.preciobtc.com/cl/bitcoin-calculadora" />
     <meta property="og:type" content="website" />
-    <link href="https://www.preciobtc.com/images/promos/home.png" rel="image_src" />
+    <link href="https://www.preciobtc.com/images/promos/calculadora.png" rel="image_src" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@PrecioBTC_com">
     <meta name="twitter:creator" content="@PrecioBTC_com">
-    <meta name="twitter:title" content="Precio Bitcoin Argentina">
-    <meta name="twitter:description" content="La mejor forma de ver cómo y dónde comprar Bitcoins Argentina">
-    <meta name="twitter:image" content="https://www.preciobtc.com/images/promos/home.png">
+    <meta name="twitter:title" content="Descubre el precio del Bitcoin más conveniente en Chile">
+    <meta name="twitter:description" content="Calcula cómo comprar y vender bitcoin al mejor precio con comisiones incluidas">
+    <meta name="twitter:image" content="https://www.preciobtc.com/images/promos/calculadora.png">
 
     <script type="text/javascript">
     //<![CDATA[ 
@@ -60,7 +59,7 @@
     </script>
 
   </head>
-  <body ng-controller="mainController" ng-cloak>
+  <body ng-controller="mainController" ng-cloak style="background-color: #7051BE;">
 
     <div menu active='home'></div>
 
@@ -87,81 +86,9 @@
       </div>
     </div>
 
-    <div class="container middle">
-      <h5>Mejor precio de compra</h5>
-      <ul>
-        <li>Transferencia Bancaria <strong>{{bestTransferencia[0].name}}</strong> <span class="green">{{bestTransferencia[0].buy | currency:"$":2}}</span></li>
-        <li>Mercadopago <strong>{{bestMercadopago[0].name}}</strong> <span class="green">{{bestMercadopago[0].buy | currency:"$":2}}</span></li>
-        <li>Rapipago/Pagofacil <strong>{{bestRapipago[0].name}}</strong> <span class="green">{{bestRapipago[0].buy | currency:"$":2}}</span></li>
-      </ul>
-    </div>
-
-    <div class="container two">
-      <div id="on-air">
-        <i class="fa fa-circle"></i>
-        <span class="live">En vivo</span>
-      </div>
-      <div class="row">
-        <div class="six columns">
-          <h4>Comprar BTC</h4>
-          <div class="modos">
-            <button ng-click="radioCompraChange('transferencia')" ng-class="{active: radioModoCompra === 'transferencia'}">Transf. Bancaria</button>
-            <button ng-click="radioCompraChange('mercadopago')" ng-class="{active: radioModoCompra === 'mercadopago'}">Mercadopago</button>
-            <button ng-click="radioCompraChange('rapipago')" ng-class="{active: radioModoCompra === 'rapipago'}">Rapipago/Pagofacil</button>
-          </div>
-
-          <div class="row">
-            <div class="nine columns">
-              <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
-            </div>
-            <div class="three columns" style="text-align: right">
-              <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoCompra" ng-change="mercadosChange()">
-              </select>
-            </div>
-          </div>
-
-          <div class="example-grid docs-example">
-            <div class="row tap" ng-repeat="(key, value) in tableBuy | filter: filterCompra | orderBy: 'buy'">
-              <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
-              <div class="five columns right">{{ value.name }}</div>
-              <div class="four columns left">{{ value.buy | currency }}</div>
-              <div class="two columns">{{ value.buy | mercado:selectedMercadoCompra:dolar.venta | currency:"":2 }}%</div>
-            </div>
-          </div>
-        </div>
-        <div class="six columns tablaVenta">
-          <h4>Vender BTC</h4>
-          <div class="modos">
-            <button ng-click="radioVenderChange('billetera')" ng-class="{active: radioModoVenta === 'billetera'}">Wallet</button>
-            <button ng-click="radioVenderChange('pesos')" ng-class="{active: radioModoVenta === 'pesos'}">Depósito bancario</button>
-            <button ng-click="radioVenderChange('mercadopago')" ng-class="{active: radioModoVenta === 'mercadopago'}">Mercadopago</button>
-          </div>
-
-          <div class="row">
-            <div class="nine columns">
-              <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
-            </div>
-            <div class="three columns" style="text-align: right">
-              <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoVenta" ng-change="mercadosChange()">
-              </select>
-            </div>
-          </div>
-
-          <div class="example-grid docs-example">
-            <div class="row tap" ng-repeat="(key, value) in tableSell | filter: filterVenta | orderBy: '-sell'">
-              <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
-              <div class="five columns right">{{ value.name }}</div>
-              <div class="four columns left">{{ value.sell | currency }}</div>
-              <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.venta | currency:"":2 }}%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container one">
       <div class="row trans">
-        <h2>Calculá el valor de tu operación de Bitcoin</h2>
+        <h2>Calcula el valor de tu operación de Bitcoins</h2>
         <p>Compara y elige tu Mejor Opción</p>
       </div>
       <form name="calcForm">
@@ -238,6 +165,6 @@
     <script src="/angular-scroll/angular-scroll.min.js"></script>
     <script src="/angular-socket-io/socket.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-    <script src="/javascripts/main.js"></script>
+    <script src="/javascripts/main-cl.js"></script>
   </body>
 </html>
