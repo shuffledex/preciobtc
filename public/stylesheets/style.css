@@ -1,6 +1,6 @@
-h2, h3 {
+h1, h2, h3 {
   color: white; }
-h2 {
+h2, h1 {
   font-size: 3.2rem; }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
@@ -20,6 +20,18 @@ select {
   border-radius: 8px; }
 form {
   margin: 0; }
+.toRight {
+  text-align: right; }
+.toLeft {
+  text-align: left; }
+.twelveSize {
+  font-size: 12px; }
+.fourteenSize {
+  font-size: 14px; }
+.twentythreeSize {
+  font-size: 23px; }
+.violet {
+  background-color: #7051BE; }
 .container {
   max-width: 100%; }
 .home {
@@ -140,14 +152,16 @@ select.mercados {
   max-width: 100%;
   background: #7051BE;
   padding: 40px 0; }
-.container.one h2 {
+.container.one h2,
+.container.one h1 {
   color: white; }
 .container.one label {
   margin-top: 10px;
   color: #C6B9E5; }
 .container.one .trans {
   text-align: center; }
-.container.one .trans h2 {
+.container.one .trans h2,
+.container.one .trans h1 {
   font-weight: 600;
   margin: 0 20px; }
 .container.one .trans p {
@@ -469,7 +483,7 @@ pre code {
   }
 }
 @media (min-width: 550px) {
-  h2 {
+  h2, h1 {
     font-size: 5.2rem; }
   .topnav {
     padding: 4px 122px; }

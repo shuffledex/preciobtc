@@ -67,7 +67,7 @@
     <div class="container ticker">
       <div class="row">
         <div class="six columns dolar">
-          <ul style="text-align: left">
+          <ul class="toLeft">
             <li>Dolar compra</li>
             <li class="green">{{ dolar.compra | currency:"$ ":2 }}</li>
             <li>·</li>
@@ -110,7 +110,7 @@
             <div class="nine columns">
               <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
             </div>
-            <div class="three columns" style="text-align: right">
+            <div class="three columns" class="toRight">
               <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoCompra" ng-change="mercadosChange()">
               </select>
             </div>
@@ -135,7 +135,7 @@
             <div class="nine columns">
               <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
             </div>
-            <div class="three columns" style="text-align: right">
+            <div class="three columns" class="toRight">
               <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoVenta" ng-change="mercadosChange()">
               </select>
             </div>
@@ -155,7 +155,7 @@
 
     <div class="container one">
       <div class="row trans">
-        <h2>Calculá el valor de tu operación de Bitcoin</h2>
+        <h1>Calcula el valor de tu operación de Bitcoin</h1>
         <p>Compara y elige tu Mejor Opción</p>
       </div>
       <form name="calcForm">
@@ -166,7 +166,7 @@
             </select>
           </div>
           <div class="two columns">
-            <label for="modo">Modo <span style="font-size: 12px"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>
+            <label for="modo">Modo <span class="twelveSize"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, se habilitarán las plataformas disponibles" tooltip-size="large" tooltip-side="right"></i></span></label>
             <select class="u-full-width" id="modo" ng-options="modo.name for modo in modos" ng-model="selectedModo" ng-change="modosChange()">
             </select>
           </div>
@@ -182,8 +182,8 @@
                 <input class="u-full-width" type="text" placeholder="" id="monto" name="monto" ng-pattern="/^[0-9\.]*$/" required ng-model="selectedMonto" ng-change="inputChange()">
               </div>
               <div class="two columns iconMonto">
-                <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" style="font-size:23px;"></i></span>
-                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" style="font-size:23px;"></i></span>
+                <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" class="twentythreeSize"></i></span>
+                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" class="twentythreeSize"></i></span>
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
         <div class="transCard">
             <i class="btc-icon fab fa-bitcoin"></i>
             <div class="header">
-              <h5>{{ selectedSitio.name }} <span style="font-size: 14px"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
+              <h5>{{ selectedSitio.name }} <span class="fourteenSize"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
             </div>
             <ul>
               <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>

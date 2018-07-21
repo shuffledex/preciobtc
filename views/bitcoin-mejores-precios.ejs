@@ -66,7 +66,7 @@
     <div class="container ticker">
       <div class="row">
         <div class="six columns dolar">
-          <ul style="text-align: left">
+          <ul class="toLeft">
             <li>Dolar compra</li>
             <li class="green">{{ dolar.compra | currency:"$ ":2 }}</li>
             <li>·</li>
@@ -135,7 +135,7 @@
             <div class="nine columns">
               <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
             </div>
-            <div class="three columns" style="text-align: right">
+            <div class="three columns" class="toRight">
               <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoCompra" ng-change="mercadosChange()">
               </select>
             </div>
@@ -184,7 +184,7 @@
             <div class="nine columns">
               <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
             </div>
-            <div class="three columns" style="text-align: right">
+            <div class="three columns" class="toRight">
               <select class="mercados" id="mercados" ng-options="mercado.name for mercado in mercados" ng-model="selectedMercadoVenta" ng-change="mercadosChange()">
               </select>
             </div>
