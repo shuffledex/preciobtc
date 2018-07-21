@@ -21,17 +21,17 @@ select {
 form {
   margin: 0; }
 .toRight {
-  text-align: right; }
+  text-align: right !important; }
 .toLeft {
-  text-align: left; }
+  text-align: left !important; }
 .twelveSize {
-  font-size: 12px; }
+  font-size: 12px !important; }
 .fourteenSize {
-  font-size: 14px; }
+  font-size: 14px !important; }
 .twentythreeSize {
-  font-size: 23px; }
+  font-size: 23px !important; }
 .violet {
-  background-color: #7051BE; }
+  background-color: #7051BE !important; }
 .container {
   max-width: 100%; }
 .home {
