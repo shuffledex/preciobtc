@@ -528,7 +528,6 @@ angular.module('preciobtc', [
 	'720kb.tooltips',
 	'duScroll',
 	'hl.sticky',
-	'timeago',
 	'preciobtc.controllers',
-	'preciobtc.services',
+	'preciobtc.services'
 ]);
