@@ -68,10 +68,10 @@
         <div class="six columns dolar">
           <ul class="toLeft">
             <li>Dolar compra</li>
-            <li class="green">{{ dolar.compra | currency:"$ ":2 }}</li>
+            <li class="green">{{ dolar.compra | currency:"ARS ":2 }}</li>
             <li>·</li>
             <li>Dolar venta</li>
-            <li class="green">{{ dolar.venta | currency:"$ ":2 }}</li>
+            <li class="green">{{ dolar.venta | currency:"ARS ":2 }}</li>
           </ul>
         </div>
         <div class="six columns">
@@ -88,7 +88,7 @@
 
     <div class="container one">
       <div class="row trans">
-        <h1>Calculá el valor de tu operación de Bitcoins</h1>
+        <h1>Calculá el valor de tu operación de Bitcoin</h1>
         <p>Compara y elige tu Mejor Opción</p>
       </div>
       <form name="calcForm">
@@ -110,13 +110,13 @@
           </div>
           <div class="two columns">
             <div class="row">
-              <div class="ten columns inputMonto">
+              <div class="three columns iconMonto">
+                <span ng-show="selectedOperacion.name == 'Compra'">ARS</span>
+                <span ng-show="selectedOperacion.name == 'Venta'">BTC></span>
+              </div>
+              <div class="nine columns inputMonto">
                 <label for="monto">Monto</label>
                 <input class="u-full-width" type="text" placeholder="" id="monto" name="monto" ng-pattern="/^[0-9\.]*$/" required ng-model="selectedMonto" ng-change="inputChange()">
-              </div>
-              <div class="two columns iconMonto">
-                <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" class="twentythreeSize"></i></span>
-                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" class="twentythreeSize"></i></span>
               </div>
             </div>
           </div>
@@ -133,8 +133,8 @@
               <h5>{{ selectedSitio.name }} <span class="fourteenSize"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
             </div>
             <ul>
-              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>
-              <li ng-show="selectedOperacion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"$":2 }}</strong></li>
+              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency:"ARS " }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>
+              <li ng-show="selectedOperacion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"ARS ":2 }}</strong></li>
             </ul>
         </div>
         <p class="msg"><i class="fas fa-bullhorn"></i> {{ transMsg }}</p>

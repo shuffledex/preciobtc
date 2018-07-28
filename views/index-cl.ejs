@@ -69,10 +69,10 @@
         <div class="six columns dolar">
           <ul class="toLeft">
             <li>Dolar compra</li>
-            <li class="green">{{ dolar.compra | currency:"$ ":2 }}</li>
+            <li class="green">{{ dolar.compra | currency:"CLP ":2 }}</li>
             <li>·</li>
             <li>Dolar venta</li>
-            <li class="green">{{ dolar.venta | currency:"$ ":2 }}</li>
+            <li class="green">{{ dolar.venta | currency:"CLP ":2 }}</li>
           </ul>
         </div>
         <div class="six columns">
@@ -90,7 +90,7 @@
     <div class="container middle">
       <h5>Mejor precio de compra</h5>
       <ul>
-        <li>Transferencia Bancaria <strong>{{bestTransferencia[0].name}}</strong> <span class="green">{{bestTransferencia[0].buy | currency:"$":2}}</span></li>
+        <li>Transferencia Bancaria <strong>{{bestTransferencia[0].name}}</strong> <span class="green">{{bestTransferencia[0].buy | currency:"CLP ":2}}</span></li>
       </ul>
     </div>
 
@@ -119,8 +119,8 @@
           <div class="example-grid docs-example">
             <div class="row tap" ng-repeat="(key, value) in tableBuy | filter: filterCompra | orderBy: 'buy'">
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
-              <div class="five columns right">{{ value.name }}</div>
-              <div class="four columns left">{{ value.buy | currency }}</div>
+              <div class="four columns right">{{ value.name }}</div>
+              <div class="five columns left">{{ value.buy | currency:"CLP " }}</div>
               <div class="two columns">{{ value.buy | mercado:selectedMercadoCompra:dolar.venta | currency:"":2 }}%</div>
             </div>
           </div>
@@ -144,8 +144,8 @@
           <div class="example-grid docs-example">
             <div class="row tap" ng-repeat="(key, value) in tableSell | filter: filterVenta | orderBy: '-sell'">
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
-              <div class="five columns right">{{ value.name }}</div>
-              <div class="four columns left">{{ value.sell | currency }}</div>
+              <div class="four columns right">{{ value.name }}</div>
+              <div class="five columns left">{{ value.sell | currency:"CLP " }}</div>
               <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.venta | currency:"":2 }}%</div>
             </div>
           </div>
@@ -177,13 +177,13 @@
           </div>
           <div class="two columns">
             <div class="row">
-              <div class="ten columns inputMonto">
+              <div class="three columns iconMonto">
+                <span ng-show="selectedOperacion.name == 'Compra'">CLP</span>
+                <span ng-show="selectedOperacion.name == 'Venta'">BTC</span>
+              </div>
+              <div class="nine columns inputMonto">
                 <label for="monto">Monto</label>
                 <input class="u-full-width" type="text" placeholder="" id="monto" name="monto" ng-pattern="/^[0-9\.]*$/" required ng-model="selectedMonto" ng-change="inputChange()">
-              </div>
-              <div class="two columns iconMonto">
-                <span ng-show="selectedOperacion.name == 'Compra'"><i class="fas fa-dollar-sign" class="twentythreeSize"></i></span>
-                <span ng-show="selectedOperacion.name == 'Venta'"><i class="fab fa-bitcoin" class="twentythreeSize"></i></span>
               </div>
             </div>
           </div>
@@ -200,8 +200,8 @@
               <h5>{{ selectedSitio.name }} <span class="fourteenSize"><i class="fas fa-question-circle" tooltips tooltip-template="{{questionMsg}}" tooltip-size="large" tooltip-side="right" tooltip-smart="true"></i></span></h5>
             </div>
             <ul>
-              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>
-              <li ng-show="selectedOperacion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"$":2 }}</strong></li>
+              <li ng-show="selectedOperacion.name == 'Compra'">Con {{ selectedMonto | currency:"CLP " }} podés comprar <strong>{{ buyInARS }} BTC</strong></li>
+              <li ng-show="selectedOperacion.name == 'Venta'">Vendiendo {{ selectedMonto }} BTC obtendrás <strong>{{ sellInBTC | currency:"CLP ":2 }}</strong></li>
             </ul>
         </div>
         <p class="msg"><i class="fas fa-bullhorn"></i> {{ transMsg }}</p>

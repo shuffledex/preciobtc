@@ -561,7 +561,7 @@ pre code {
 }
 @media (min-width: 1000px) {
   .form {
-    width:888px;}
+    width:999px;}
 }
 @media screen and (max-width: 600px) {
   .topnav .secciones a:not(:last-child) {display: none;}

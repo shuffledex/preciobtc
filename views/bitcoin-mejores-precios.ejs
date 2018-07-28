@@ -68,10 +68,10 @@
         <div class="six columns dolar">
           <ul class="toLeft">
             <li>Dolar compra</li>
-            <li class="green">{{ dolar.compra | currency:"$ ":2 }}</li>
+            <li class="green">{{ dolar.compra | currency:"ARS ":2 }}</li>
             <li>·</li>
             <li>Dolar venta</li>
-            <li class="green">{{ dolar.venta | currency:"$ ":2 }}</li>
+            <li class="green">{{ dolar.venta | currency:"ARS ":2 }}</li>
           </ul>
         </div>
         <div class="six columns">
@@ -89,9 +89,9 @@
     <div class="container middle">
       <h5>Mejor precio de compra</h5>
       <ul>
-        <li>Transferencia Bancaria <strong>{{bestTransferencia[0].name}}</strong> <span class="green">{{bestTransferencia[0].buy | currency:"$":2}}</span></li>
-        <li>Mercadopago <strong>{{bestMercadopago[0].name}}</strong> <span class="green">{{bestMercadopago[0].buy | currency:"$":2}}</span></li>
-        <li>Rapipago/Pagofacil <strong>{{bestRapipago[0].name}}</strong> <span class="green">{{bestRapipago[0].buy | currency:"$":2}}</span></li>
+        <li>Transferencia Bancaria <strong>{{bestTransferencia[0].name}}</strong> <span class="green">{{bestTransferencia[0].buy | currency:"ARS ":2}}</span></li>
+        <li>Mercadopago <strong>{{bestMercadopago[0].name}}</strong> <span class="green">{{bestMercadopago[0].buy | currency:"ARS ":2}}</span></li>
+        <li>Rapipago/Pagofacil <strong>{{bestRapipago[0].name}}</strong> <span class="green">{{bestRapipago[0].buy | currency:"ARS ":2}}</span></li>
       </ul>
     </div>
 
@@ -109,28 +109,6 @@
             <button ng-click="radioCompraChange('rapipago')" ng-class="{active: radioModoCompra === 'rapipago'}">Rapipago/Pagofacil</button>
           </div>
 
-          <!--div class="row medios">
-            <h5>Modo de compra <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para cargar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
-            <div class="four columns" style="margin-left: 0;">
-              <label class="transferencia">
-                <input type="radio" ng-model="radioModoCompra" value="transferencia" ng-change="radioCompraChange()">
-                <span class="label-body">Transf. Bancaria</span>
-              </label>
-            </div>
-            <div class="four columns">
-              <label class="mercadopago">
-                <input type="radio" ng-model="radioModoCompra" value="mercadopago" ng-change="radioCompraChange()">
-                <span class="label-body">Mercadopago</span>
-              </label>
-            </div>
-            <div class="four columns">
-              <label class="rapipago">
-                <input type="radio" ng-model="radioModoCompra" value="rapipago" ng-change="radioCompraChange()">
-                <span class="label-body">Rapi/Pago facil</span>
-              </label>
-            </div>
-          </div-->
-
           <div class="row">
             <div class="nine columns">
               <p class="ordenado">Precio de referencia internacional para calcular % de sobreprecio local:</p>
@@ -144,8 +122,8 @@
           <div class="example-grid docs-example">
             <div class="row tap" ng-repeat="(key, value) in tableBuy | filter: filterCompra | orderBy: 'buy'">
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
-              <div class="five columns right">{{ value.name }}</div>
-              <div class="four columns left">{{ value.buy | currency }}</div>
+              <div class="four columns right">{{ value.name }}</div>
+              <div class="five columns left">{{ value.buy | currency:"ARS " }}</div>
               <div class="two columns">{{ value.buy | mercado:selectedMercadoCompra:dolar.venta | currency:"":2 }}%</div>
             </div>
           </div>
@@ -157,28 +135,6 @@
             <button ng-click="radioVenderChange('pesos')" ng-class="{active: radioModoVenta === 'pesos'}">Depósito bancario</button>
             <button ng-click="radioVenderChange('mercadopago')" ng-class="{active: radioModoVenta === 'mercadopago'}">Mercadopago</button>
           </div>
-
-          <!--div class="row medios">
-            <h5>Modo de venta <span class="question"><i class="fas fa-question-circle" tooltips tooltip-template="Según el modo que elijas, la tabla te mostrará qué plataforma tiene hablitada esa opción para retirar saldo" tooltip-size="large" tooltip-side="right"></i></span></h5>
-            <div class="four columns" style="margin-left: 0;">
-              <label class="transferencia">
-                <input type="radio" ng-model="radioModoVenta" value="billetera" ng-change="radioVenderChange()">
-                <span class="label-body">Wallet</span>
-              </label>
-            </div>
-            <div class="four columns">
-              <label class="transferencia">
-                <input type="radio" ng-model="radioModoVenta" value="pesos" ng-change="radioVenderChange()">
-                <span class="label-body">Depósito</span>
-              </label>
-            </div>
-            <div class="four columns">
-              <label class="mercadopago">
-                <input type="radio" ng-model="radioModoVenta" value="mercadopago" ng-change="radioVenderChange()">
-                <span class="label-body">Mercadopago</span>
-              </label>
-            </div>
-          </div-->
 
           <div class="row">
             <div class="nine columns">
@@ -193,8 +149,8 @@
           <div class="example-grid docs-example">
             <div class="row tap" ng-repeat="(key, value) in tableSell | filter: filterVenta | orderBy: '-sell'">
               <div class="one columns autohHover"><i class="fas fa-user-tie" ng-if="value.type == 'broker'" tooltips tooltip-template="Broker" tooltip-smart="true"></i><i class="fas fa-chart-area" ng-if="value.type == 'exchange'" tooltips tooltip-template="Exchange" tooltip-smart="true"></i></div>
-              <div class="five columns right">{{ value.name }}</div>
-              <div class="four columns left">{{ value.sell | currency }}</div>
+              <div class="four columns right">{{ value.name }}</div>
+              <div class="five columns left">{{ value.sell | currency:"ARS " }}</div>
               <div class="two columns">{{ value.sell | mercado:selectedMercadoVenta:dolar.venta | currency:"":2 }}%</div>
             </div>
           </div>
