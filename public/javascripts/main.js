@@ -527,6 +527,7 @@ angular.module('preciobtc', [
 	'ngAnimate',
 	'720kb.tooltips',
 	'duScroll',
+	'hl.sticky',
 	'preciobtc.controllers',
 	'preciobtc.services'
 ]);

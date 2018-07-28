@@ -63,6 +63,8 @@
   </head>
   <body ng-controller="mainController" ng-cloak>
 
+    <div id="header-banner-wrapper"></div>
+
     <div menu active='home'></div>
 
     <div class="container ticker">
@@ -95,6 +97,14 @@
         <li>Mercadopago <strong>{{bestMercadopago[0].name}}</strong> <span class="green">{{bestMercadopago[0].buy | currency:"$":2}}</span></li>
         <li>Rapipago/Pagofacil <strong>{{bestRapipago[0].name}}</strong> <span class="green">{{bestRapipago[0].buy | currency:"$":2}}</span></li>
       </ul>
+    </div>
+
+    <div class="container" id="middle-banner-wrapper">
+      <div class="row">
+        <div class="four columns"></div>
+        <div class="four columns"></div>
+        <div class="four columns"></div>
+      </div>
     </div>
 
     <div class="container two">
@@ -158,6 +168,24 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!--div class="container two">
+      <div class="row">
+        <div class="two columns">
+          <div id="left-banner-wrapper"></div>
+        </div>
+        <div class="eight columns tabla marginLeftTwoP"-->
+          <!-- on-air -->
+          <!-- row -->
+        <!--/div>
+        <div class="two columns marginLeftTwoP">
+          <div id="right-banner-wrapper"></div>
+        </div>
+      </div>
+    </div-->
+
+    <div class="container" id="footer-banner-wrapper">
     </div>
 
     <div class="container one">
@@ -237,6 +265,7 @@
     <script src="/angular-animate/angular-animate.min.js"></script>
     <script src="/angular-tooltips/dist/angular-tooltips.min.js"></script>
     <script src="/angular-scroll/angular-scroll.min.js"></script>
+    <script src="/angular-sticky/dist/angular-sticky.min.js"></script>
     <script src="/angular-socket-io/socket.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
     <script src="/javascripts/main.js"></script>

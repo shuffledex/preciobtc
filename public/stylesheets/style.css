@@ -32,6 +32,8 @@ form {
   font-size: 23px !important; }
 .violet {
   background-color: #7051BE !important; }
+.marginLeftTwoP {
+  margin-left: 2%; }
 .container {
   max-width: 100%; }
 .home {
@@ -82,14 +84,13 @@ form {
   padding-left: 10px }
 header {
   height: 60px;
-  position: fixed;
-  top: 0;
+  /*position: fixed;
+  top: 0;*/
   z-index: 10;
   width: 100%;
   max-width: 100%;
   background: #7051BE; }
 .container.ticker {
-  margin-top: 60px;
   width: 100%;
   max-width: 100%;
   background: #7051BE;
@@ -130,7 +131,7 @@ select.mercados {
   margin: 0 0 5px 0;
   width: 100%;
   font-size: 11px;
-  padding: 0 14px;
+  padding: 0 9px;
   font-weight: 600;
   letter-spacing: .1rem;
   text-transform: uppercase;
@@ -223,7 +224,7 @@ select.mercados {
   font-weight: 600;
   font-size: 14px !important;}
 .container.two {
-  margin-bottom: 100px;}
+  margin-bottom: 50px; }
 .tap:hover {
   opacity: 1 !important; }
 .tap:hover > .columns,
@@ -449,6 +450,11 @@ footer .secciones li {
   text-align: center; }
 pre code {
  font-family:'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+#header-banner-wrapper,
+#left-banner-wrapper,
+#right-banner-wrapper,
+#footer-banner-wrapper {
+  display: none; }
 @-moz-keyframes blinker {
   0% {
     opacity: 1.0;
@@ -483,14 +489,19 @@ pre code {
   }
 }
 @media (min-width: 550px) {
+  .container {
+    width: 90%; }
   h2, h1 {
     font-size: 5.2rem; }
+  #left-banner-wrapper,
+  #right-banner-wrapper {
+    display: none; }
   .topnav {
-    padding: 4px 122px; }
+    padding: 4px 59px; }
   .hide {
     display: none !important; }
   .ticker .row {
-    padding: 0 128px; }
+    padding: 0 65px; }
   .ticker ul {
     display: block; }
   .ticker li {
@@ -512,6 +523,8 @@ pre code {
     font-size: 2.5rem;
     font-weight: 600;
     color: white; }
+  .columns.tabla {
+    width: 69.3333333333%; }
   .example-grid .column,
   .example-grid .columns {
     font-size: 1.5rem;
@@ -534,7 +547,7 @@ pre code {
     margin-bottom: 0;
     width: auto; }
   footer {
-    padding: 58px 128px 0 128px;}
+    padding: 58px 73px 0 73px;}
   footer .copyright {
     text-align: left; }
   footer .secciones li {
