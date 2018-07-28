@@ -556,6 +556,7 @@ pre code {
     width: auto;
     margin: 0; }
   .ordenado {
+    padding-top: 10px;
     font-style: italic;
     text-align: right; }
 }
